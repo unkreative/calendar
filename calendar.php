@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <?php
-
-$servername='localhost';
-$username='root';
-$password='root';
+$servername='sql381.your-server.de';
+$username='lemaco_lou';
+$password='fzivu28GGa8PFS49';
 $dbname = "calendar";
 $conn=mysqli_connect($servername,$username,$password,"$dbname");
 
