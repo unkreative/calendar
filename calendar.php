@@ -3,13 +3,31 @@
 $servername='sql381.your-server.de';
 $username='lemaco_lou';
 $password='fzivu28GGa8PFS49';
-$dbname = "calendar";
+$dbname = "lemaco_lou";
 $conn=mysqli_connect($servername,$username,$password,"$dbname");
 
 if(!$conn){
     die('Could not Connect MySql Server:' .mysql_error());
 }
+$sql_info = "SELECT id, iam, classe FROM student1";
+$result_info = $conn->query($sql_info);
 
+$arr_id = [];
+$arr_iam = [];
+$arr_classe = [];
+
+if ($result_info->num_rows > 0) {
+    // output data of each row
+    while($row = $result_info->fetch_assoc()) {
+  
+        array_push($arr_id, $row["id"]);
+        array_push($arr_iam, $row["iam"]);
+        array_push($arr_classe, $row["classe"]);
+        echo $row["classe"];
+   
+    
+}
+} 
 $sql_lundi = "SELECT lundi_1, lundi_2, lundi_3, lundi_4, lundi_5, lundi_6, lundi_7, lundi_8 FROM student1";
 $sql_mardi = "SELECT mardi_1, mardi_2, mardi_3, mardi_4, mardi_5, mardi_6, mardi_7, mardi_8 FROM student1";
 $sql_mercredi = "SELECT mercredi_1, mercredi_2, mercredi_3, mercredi_4, mercredi_5, mercredi_6, mercredi_7, mercredi_8 FROM student1";
@@ -194,13 +212,28 @@ body {
 
 }
 table {
-background-color: rgb(0, 0, 0);
+  width: 100%;
+  background-color: #ffffff;
 
+  border-color: #000000;
+  border-collapse: collapse;
+  text-align: center;
 }
 
+td {
+padding: 10px;
+text-align: center;
+width: 100px;
+border: 1px solid black;
+
+
+}
 th {
 padding: 10px;
 text-align: center;
+width: 10px;
+border: 1px solid black;
+
 }
 
 tr {
@@ -217,6 +250,7 @@ background-color: rgb(255, 255, 255);
 	border-radius:10px;
 } 
 .mathe {
+    width: 50px;
     background-color: #0000FF;
     text-align: center;
 	border-radius:10px;
@@ -235,7 +269,28 @@ background-color: rgb(255, 255, 255);
     background-color: orange;
     text-align: center;
 	border-radius:10px;
-} 
+}
+
+/* other styles */
+
+.cours {
+    background-color: grey;
+    text-align: center;
+	border-radius:10px;
+
+}
+
+.entreprise {
+    background-color: #ADD8E6;
+    text-align: center;
+	border-radius:10px;
+}
+
+.fraistonn {
+    background-color: #ADD8E6;
+    text-align: center;
+	border-radius:10px;
+}
 
     </style>
 </head>
@@ -245,7 +300,6 @@ background-color: rgb(255, 255, 255);
             <th></th>
             <th class="a">Lundi</th>
             <th>Mardi</th>
-            <th>Jeudi</th>
             <th>Mercredi</th>
             <th>Jeudi</th>
             <th>Vendredi</th>
@@ -323,7 +377,10 @@ background-color: rgb(255, 255, 255);
             <?php echo $arr_mercredi_8[0]?>
             <?php echo $arr_jeudi_8[0]?>
             <?php echo $arr_vendredi_8[0]?>
+
         </tr>
 
+
     </table>
+
 </body>
