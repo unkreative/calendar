@@ -1,15 +1,21 @@
 import subprocess
 
 inp = """
-
-lundi1
-lundi2
-lundi3
-lundi4
-lundi5
+  mardi_plage1 boolean
+  mardi_plage1_occupation varchar
+  mardi_plage2 boolean
+  mardi_plage2_occupation varchar
+  mardi_plage3 boolean
+  mardi_plage3_occupation varchar
+  mardi_plage4 boolean
+  mardi_plage4_occupation varchar
+  mardi_plage5 boolean
+  mardi_plage5_occupation varchar
+  mardi_plage6 boolean
+  mardi_plage6_occupation varchar
 
 """
-word_to_replace = "lundi"
+word_to_replace = "mardi"
 words_to_replace_with = ["mardi", "mercredi", "jeudi", "vendredi"]
 lst = []
 def change(inp, words_to_replace, words_to_replace_with):
