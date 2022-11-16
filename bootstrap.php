@@ -3,13 +3,12 @@
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
-require_once "vendor/autoload.php";
+require_once "doctrine/vendor/autoload.php";
 
 // Create a simple "default" Doctrine ORM configuration for Attributes
-$config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: array(__DIR__."/src"),
-    isDevMode: true,
-);
+$paths = array(array(__DIR__."/src"));
+$isDevMode = true;
+$config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
 // or if you prefer annotation, YAML or XML
 // $config = ORMSetup::createAnnotationMetadataConfiguration(
 //    paths: array(__DIR__."/src"),
