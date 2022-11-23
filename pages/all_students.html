@@ -48,7 +48,11 @@ p {
   float: left;
   text-align: center;
   order: 5; /* default is 0 */
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-right: 20px;
+
   text-decoration: none; 
   font-size: 13px;
   width: 200px;
@@ -73,8 +77,8 @@ p {
 .containerr {
   overflow: hidden;
   display: flex; 
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 0px;
+  margin-right: 0px;
   flex-wrap: wrap;
   overflow: hidden;
 
@@ -109,6 +113,7 @@ p {
     <div id="navbar"></div>
     <script src="/scripts/navbar.js"></script>
 
+  <!-- <div class="container"> -->
 
     <div id="body" class="container">
     
@@ -121,7 +126,6 @@ p {
 
       </div>
       
-      </div>
 
     <div id="main_box" class="containerr">
 
@@ -172,10 +176,12 @@ p {
       <a href="" class="filterDiv Classes">1C</a>
       <a href="" class="filterDiv Classes">1D</a>
       <a href="/content/1G" class="filterDiv Classes">1G</a>
-      
+    </div>
+      <!--  -->
 </div>
     </div>
   </div>
+</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
