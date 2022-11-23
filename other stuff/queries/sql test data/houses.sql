@@ -1,0 +1,10 @@
+insert into houses (id, name, house_number, schoolyear) values (1, 'PA', 4, 2022);
+insert into houses (id, name, house_number, schoolyear) values (2, null, 8, 2021);
+insert into houses (id, name, house_number, schoolyear) values (3, null, 9, 2022);
+insert into houses (id, name, house_number, schoolyear) values (4, null, 6, 2022);
+insert into houses (id, name, house_number, schoolyear) values (5, null, 6, 2021);
+insert into houses (id, name, house_number, schoolyear) values (6, null, 1, 2021);
+insert into houses (id, name, house_number, schoolyear) values (7, null, 8, 2022);
+insert into houses (id, name, house_number, schoolyear) values (8, null, 1, 2022);
+insert into houses (id, name, house_number, schoolyear) values (9, null, 9, 2022);
+insert into houses (id, name, house_number, schoolyear) values (10, null, 8, 2022);

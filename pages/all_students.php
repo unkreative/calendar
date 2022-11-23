@@ -1,4 +1,61 @@
 <!doctype html>
+
+<?php
+
+
+  $db_host = 'localhost';
+  $db_user = 'root';
+  $db_password = 'root';
+  $db_db = 'schedule';
+ 
+  $mysqli = @new mysqli(
+    $db_host,
+    $db_user,
+    $db_password,
+    $db_db
+  );
+	
+  if ($mysqli->connect_error) {
+    echo 'Errno: '.$mysqli->connect_errno;
+    echo '<br>';
+    echo 'Error: '.$mysqli->connect_error;
+    exit();
+  }
+
+  // echo 'Success: A proper connection to MySQL was made.';
+  // echo '<br>';
+  // echo 'Host information: '.$mysqli->host_info;
+  // echo '<br>';
+  // echo 'Protocol version: '.$mysqli->protocol_version;
+
+  $id = array();
+  $first_name = array();
+  $second_name = array();
+  $iam = array();
+  $schoolyear = array();
+
+  $sql = "SELECT id, first_name, second_name, iam, schoolyear FROM students";
+  $result = $mysqli->query($sql);
+
+  if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      array_push($id, $row["id"]);
+      array_push($first_name, $row["first_name"]);
+      array_push($second_name, $row["second_name"]);
+      array_push($iam, $row["iam"]);
+      array_push($schoolyear, $row["schoolyear"]);
+
+      // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
+    }
+  } else {
+    echo "0 results";
+  }
+
+  $mysqli->close();
+?>
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -176,6 +233,24 @@ p {
       <a href="" class="filterDiv Classes">1C</a>
       <a href="" class="filterDiv Classes">1D</a>
       <a href="/content/1G" class="filterDiv Classes">1G</a>
+      
+      <script>
+
+        var id = <?php echo json_encode($id); ?>;
+        var first_name = <?php echo json_encode($first_name); ?>;
+        var second_name = <?php echo json_encode($second_name); ?>;
+        var iam = <?php echo json_encode($iam); ?>;
+        var schoolyear = <?php echo json_encode($schoolyear); ?>;
+
+        //  for id, write name in main_box div
+        
+
+
+
+
+
+
+      </script>
     </div>
       <!--  -->
 </div>
