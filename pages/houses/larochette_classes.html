@@ -49,7 +49,7 @@ p {
   text-align: center;
   order: 5; /* default is 0 */
   margin: 10px;
-  
+  text-decoration: none; 
   font-size: 13px;
   width: 200px;
   height: 130px;
@@ -58,9 +58,13 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none; /*Hidden by default */
+  /* display: none; Hidden by default */
+  color: black;
 }
 
+.filterDiv:hover {
+  text-decoration: none; 
+}
 /* The "show" class is added to the filtered elements */
 .show {
    display: flex !important;
@@ -108,66 +112,16 @@ p {
 
     <div id="body" class="container">
     
-      <div id="myBtnContainer">  
-        <!-- <button class="btnn active" onclick="filterSelection('all')"> Show all</button> -->
-
-        <button class="btnn active" onclick="filterSelection('Maisons')"> Maisons</button>
-        <button class="btnn" onclick="filterSelection('Classes')"> Classes</button>
-        <button class="btnn" onclick="filterSelection('eleves')"> eleves</button>
-
-      </div>
-      
-      </div>
 
     <div id="main_box" class="containerr">
 
-      <!-- houses -->
-      <div class="filterDiv Maisons">Ansenbourg</div>
-      <div class="filterDiv Maisons">Hollenfels</div>
-      <div class="filterDiv Maisons">Koerich</div>
-      <div class="filterDiv Maisons">Simmern</div>
-      <div class="filterDiv Maisons">Schoenfels</div>
-      <div class="filterDiv Maisons">Larochette</div>
-      <div class="filterDiv Maisons">Mersch</div>
-
       <!-- classes -->
             
-      <div class="filterDiv Classes">7G1</div>
-      <div class="filterDiv Classes">7C2</div>
-      <div class="filterDiv Classes">7C3</div>
-      <div class="filterDiv Classes">7P4</div>
-      <div class="filterDiv Classes">7C5</div>
-      <div class="filterDiv Classes">7C6</div>
-      <div class="filterDiv Classes">7G6</div>
-      <div class="filterDiv Classes">6C1</div>
-      <div class="filterDiv Classes">6P2</div>
-      <div class="filterDiv Classes">6G2</div>
-      <div class="filterDiv Classes">6G3</div>
-      <div class="filterDiv Classes">6C4</div>
-      <div class="filterDiv Classes">6C5</div>
-      <div class="filterDiv Classes">6C6</div>
-      <div class="filterDiv Classes">5C1</div>
-      <div class="filterDiv Classes">5G1</div>
-      <div class="filterDiv Classes">5C3</div>
-      <div class="filterDiv Classes">5C4</div>
-      <div class="filterDiv Classes">5G4</div>
-      <div class="filterDiv Classes">5C5</div>
-      <div class="filterDiv Classes">5PR05</div>
-      <div class="filterDiv Classes">4C2</div>
-      <div class="filterDiv Classes">4C3</div>
-      <div class="filterDiv Classes">4C6</div>
-      <div class="filterDiv Classes">3CB</div>
-      <div class="filterDiv Classes">3CC</div>
-      <div class="filterDiv Classes">3CD</div>
-      <div class="filterDiv Classes">3CG</div>
-      <div class="filterDiv Classes">2B</div>
-      <div class="filterDiv Classes">2C</div>
-      <div class="filterDiv Classes">2D</div>
-      <div class="filterDiv Classes">2G</div>
-      <div class="filterDiv Classes">1B</div>
-      <div class="filterDiv Classes">1C</div>
-      <div class="filterDiv Classes">1D</div>
-      <div class="filterDiv Classes">1G</div>
+      <a href="" class="filterDiv Classes">7C6</a>
+      <a href="" class="filterDiv Classes">7G6</a>
+      <a href="" class="filterDiv Classes">6C6</a>
+      <a href="classes/larochette_classes_4C6.html" class="filterDiv Classes">4C6</a>
+      
 </div>
     </div>
   </div>
