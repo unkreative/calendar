@@ -2,7 +2,6 @@
 
 <?php
 
-
   $db_host = 'localhost';
   $db_user = 'root';
   $db_password = 'root';
@@ -21,36 +20,90 @@
     echo 'Error: '.$mysqli->connect_error;
     exit();
   }
+// houses
+
+$sql_houses = "SELECT id, name, house_number, schoolyear FROM houses";
+// echo "<Br>";
+// echo $sql_student;
+$result_houses = $mysqli->query($sql_houses);
+
+$id_houses = array();
+$name_houses = array();
+$number_houses = array();
+$schoolyear_houses = array();
+
+
+if ($result_houses->num_rows > 0) {
+  // output data of each row
+  while($row = $result_houses->fetch_assoc()) {
+    array_push($id_houses, $row["id"]);
+    array_push($name_houses, $row["name"]);
+    array_push($number_houses, $row["house_number"]);
+    array_push($schoolyear_houses, $row["schoolyear"]);
+
+    // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
 
   // echo 'Success: A proper connection to MySQL was made.';
   // echo '<br>';
   // echo 'Host information: '.$mysqli->host_info;
   // echo '<br>';
   // echo 'Protocol version: '.$mysqli->protocol_version;
+  $id_classes = array();
+  $name_classes = array();
+  $schoolyear_classes = array();
 
-  $id = array();
-  $first_name = array();
-  $second_name = array();
-  $iam = array();
-  $schoolyear = array();
 
-  $sql = "SELECT id, first_name, second_name, iam, schoolyear FROM students";
-  $result = $mysqli->query($sql);
+  $sql_classes = "SELECT id, name, schoolyear FROM classes";
+  $result_classes = $mysqli->query($sql_classes);
 
-  if ($result->num_rows > 0) {
+  if ($result_classes->num_rows > 0) {
     // output data of each row
-    while($row = $result->fetch_assoc()) {
-      array_push($id, $row["id"]);
-      array_push($first_name, $row["first_name"]);
-      array_push($second_name, $row["second_name"]);
-      array_push($iam, $row["iam"]);
-      array_push($schoolyear, $row["schoolyear"]);
+    while($row = $result_classes->fetch_assoc()) {
+      array_push($id_classes, $row["id"]);
+      array_push($name_classes, $row["name"]);
+      array_push($schoolyear_classes, $row["schoolyear"]);
 
       // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
     }
   } else {
     echo "0 results";
   }
+
+
+
+
+  $id_student = array();
+  $first_name_student = array();
+  $second_name_student = array();
+  $iam_student = array();
+  $schoolyear_student = array();
+
+  $sql_student = "SELECT id, first_name, second_name, iam, schoolyear FROM students";
+  $result_student = $mysqli->query($sql_student);
+
+  if ($result_student->num_rows > 0) {
+    // output data of each row
+    while($row = $result_student->fetch_assoc()) {
+      array_push($id_student, $row["id"]);
+      array_push($first_name_student, $row["first_name"]);
+      array_push($second_name_student, $row["second_name"]);
+      array_push($iam_student, $row["iam"]);
+      array_push($schoolyear_student, $row["schoolyear"]);
+
+      // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
+    }
+  } else {
+    echo "0 results";
+  }
+
+
+
+
+
 
   $mysqli->close();
 ?>
@@ -183,72 +236,47 @@ p {
 
       </div>
       
-
     <div id="main_box" class="containerr">
 
       <!-- houses -->
-      <a href="" class="filterDiv Maisons">Ansenbourg</a>
-      <a href="" class="filterDiv Maisons">Hollenfels</a>
-      <a href="" class="filterDiv Maisons">Koerich</a>
-      <a href="" class="filterDiv Maisons">Simmern</a>
-      <a href="" class="filterDiv Maisons">Schoenfels</a>
-      <a href="/pages/houses/larochette_classes.html" class="filterDiv Maisons">Larochette</a>
-      <a href="" class="filterDiv Maisons">Mersch</a>
-
-      <!-- classes -->
-            
-      <a href="" class="filterDiv Classes">7G1</a>
-      <a href="" class="filterDiv Classes">7C2</a>
-      <a href="" class="filterDiv Classes">7C3</a>
-      <a href="" class="filterDiv Classes">7P4</a>
-      <a href="" class="filterDiv Classes">7C5</a>
-      <a href="" class="filterDiv Classes">7C6</a>
-      <a href="" class="filterDiv Classes">7G6</a>
-      <a href="" class="filterDiv Classes">6C1</a>
-      <a href="" class="filterDiv Classes">6P2</a>
-      <a href="" class="filterDiv Classes">6G2</a>
-      <a href="" class="filterDiv Classes">6G3</a>
-      <a href="" class="filterDiv Classes">6C4</a>
-      <a href="" class="filterDiv Classes">6C5</a>
-      <a href="" class="filterDiv Classes">6C6</a>
-      <a href="" class="filterDiv Classes">5C1</a>
-      <a href="" class="filterDiv Classes">5G1</a>
-      <a href="" class="filterDiv Classes">5C3</a>
-      <a href="" class="filterDiv Classes">5C4</a>
-      <a href="" class="filterDiv Classes">5G4</a>
-      <a href="" class="filterDiv Classes">5C5</a>
-      <a href="" class="filterDiv Classes">5PR05</a>
-      <a href="" class="filterDiv Classes">4C2</a>
-      <a href="" class="filterDiv Classes">4C3</a>
-      <a href="" class="filterDiv Classes">4C6</a>
-      <a href="" class="filterDiv Classes">3CB</a>
-      <a href="" class="filterDiv Classes">3CC</a>
-      <a href="" class="filterDiv Classes">3CD</a>
-      <a href="" class="filterDiv Classes">3CG</a>
-      <a href="" class="filterDiv Classes">2B</a>
-      <a href="" class="filterDiv Classes">2C</a>
-      <a href="" class="filterDiv Classes">2D</a>
-      <a href="" class="filterDiv Classes">2G</a>
-      <a href="" class="filterDiv Classes">1B</a>
-      <a href="" class="filterDiv Classes">1C</a>
-      <a href="" class="filterDiv Classes">1D</a>
-      <a href="/content/1G" class="filterDiv Classes">1G</a>
-      
       <script>
 
-        var id = <?php echo json_encode($id); ?>;
-        var first_name = <?php echo json_encode($first_name); ?>;
-        var second_name = <?php echo json_encode($second_name); ?>;
-        var iam = <?php echo json_encode($iam); ?>;
-        var schoolyear = <?php echo json_encode($schoolyear); ?>;
+      var id_houses = <?php echo json_encode($id_houses); ?>;
+      var name_houses = <?php echo json_encode($name_houses); ?>;
+      var number_houses = <?php echo json_encode($number_houses); ?>;
+      var schoolyear_houses = <?php echo json_encode($schoolyear_classes); ?>;
+
+      //  for id, write name in main_box div
+      const main_box = document.getElementById("main_box")
+      for (let i = 0; i < id_houses.length; i++) {
+        main_box.insertAdjacentHTML("afterbegin",`      <a href="classes.php?classes_id=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
+      }
+      </script>
+      <!-- classes -->
+      <script>
+
+      var id_classes = <?php echo json_encode($id_classes); ?>;
+      var name_classes = <?php echo json_encode($name_classes); ?>;
+      var schoolyear_classes = <?php echo json_encode($schoolyear_classes); ?>;
+
+      //  for id, write name in main_box div
+      for (let i = 0; i < id_classes.length; i++) {
+        main_box.insertAdjacentHTML("afterbegin",`      <a href="classes.php?classes_id=${id_classes[i]}" class="filterDiv Classes">${name_classes[i]}`);
+        console.log(i);
+      }
+      </script>
+
+      <script>
+        var id_student = <?php echo json_encode($id_student); ?>;
+        var first_name_student = <?php echo json_encode($first_name_student); ?>;
+        var second_name_student = <?php echo json_encode($second_name_student); ?>;
+        var iam_student = <?php echo json_encode($iam_student); ?>;
+        var schoolyear_student = <?php echo json_encode($schoolyear_student); ?>;
 
         //  for id, write name in main_box div
-        
-
-
-
-
-
+        for (let i = 0; i < id_student.length; i++) {
+          main_box.insertAdjacentHTML("afterbegin",`      <a href="student?student=${id_student[i]}" class="filterDiv eleves">${first_name_student[i]} ${second_name_student[i]}</a>`)
+        }
 
       </script>
     </div>
