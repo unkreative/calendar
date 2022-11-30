@@ -21,6 +21,7 @@
    }
    
    $link_value = $_GET['student_id'];
+   echo $link_value;
 
    // echo 'Success: A proper connection to MySQL was made.';
    // echo '<br>';
@@ -36,6 +37,7 @@
    $schoolyear = array();
    
    $sql = "SELECT id, first_name, second_name, iam, schoolyear FROM students where id = " . $link_value . "";
+   echo $sql;
    $result = $mysqli->query($sql);
    
    if ($result->num_rows > 0) {
@@ -112,6 +114,9 @@
    $id_class = array();
    $name_class = array();
    
+   echo "<br>";
+   echo $class_id_selector[0];
+   echo "<br>";
    $sql_class = "SELECT id, name, schoolyear FROM classes where id = " . $class_id_selector[0] . "";
 
    $result_class = $mysqli->query($sql_class);
