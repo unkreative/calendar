@@ -1,4 +1,19 @@
 {
     "deno.enable": true,
-    "deno.unstable": true
+    "deno.unstable": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 8889,
+            "driver": "MySQL",
+            "name": "localhost-schedule",
+            "username": "root",
+            "password": "root",
+            "database": "schedule"
+        }
+    ]
 }

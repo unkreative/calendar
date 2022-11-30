@@ -53,44 +53,113 @@
      echo "0 results";
    }
 
-   $id_tuteur_selector = array();
-   $tuteur_id = array();
+   // $id_tuteur_selector = array();
+   // $tuteur_id = array();
 
    
-   $sql_tuteur_selector = "SELECT id, student_id, tuteur_id, schoolyear FROM tuteur_student where student_id = " . $link_value . "";
-   $result_tuteur_selector = $mysqli->query($sql_tuteur_selector);
+   // $sql_tuteur_selector = "SELECT id, student_id, tuteur_id, schoolyear FROM tuteur_student where student_id = " . $link_value . "";
+   // $result_tuteur_selector = $mysqli->query($sql_tuteur_selector);
    
-   if ($result_tuteur_selector->num_rows > 0) {
-      while($row = $result_tuteur_selector->fetch_assoc()) {
+   // if ($result_tuteur_selector->num_rows > 0) {
+   //    while($row = $result_tuteur_selector->fetch_assoc()) {
    
-         array_push($id_tuteur_selector, $row["id"]);
-         array_push($tuteur_id, $row["tuteur_id"]);
+   //       array_push($id_tuteur_selector, $row["id"]);
+   //       array_push($tuteur_id, $row["tuteur_id"]);
+   //    }
+   // } else {
+   //   echo "0 results";
+   // }
+   
+   // $id_tuteur = array();
+   // $first_name_tuteur = array();
+   // $second_name_tuteur = array();
+   // $schoolyear = array();
+
+
+   // $sql_tuteur = "SELECT id, first_name, second_name, house, entreprise, schoolyear FROM tuteur where id = " . $tuteur_id_selector . "";
+   // $result_tuteur = $mysqli->query($sql_tuteur);
+
+   // if ($result_tuteur->num_rows > 0) {
+   //    while($row = $result_tuteur->fetch_assoc()) {
+   
+   //       array_push($id_tuteur, $row["id"]);
+   //       array_push($first_name_tuteur, $row["first_name"]);
+   //       array_push($second_name_tuteur, $row["second_name"]);
+   //       array_push($schoolyear, $row["schoolyear"]);
+   //    }
+   // } else {
+   //   echo "0 results";
+   // }
+
+
+   $id_class_selector = array();
+   $class_id_selector = array();
+
+   
+   $sql_class_selector = "SELECT id, student_id, classes_id FROM students_classes where student_id = " . $link_value . "";
+   $result_class_selector = $mysqli->query($sql_class_selector);
+   
+   if ($result_class_selector->num_rows > 0) {
+      while($row = $result_class_selector->fetch_assoc()) {
+   
+         array_push($id_class_selector, $row["id"]);
+         array_push($class_id_selector, $row["classes_id"]);
       }
    } else {
      echo "0 results";
    }
    
-   $id_tuteur = array();
-   $first_name_tuteur = array();
-   $second_name_tuteur = array();
-   $schoolyear = array();
-
-
-   $sql_tuteur = "SELECT id, first_name, second_name, house, entreprise, schoolyear FROM tuteur where id = " . $tuteur_id_selector . "";
-   $result_tuteur = $mysqli->query($sql_tuteur);
-
-   if ($result_tuteur->num_rows > 0) {
-      while($row = $result_tuteur->fetch_assoc()) {
+   $id_class = array();
+   $name_class = array();
    
-         array_push($id_tuteur, $row["id"]);
-         array_push($first_name_tuteur, $row["first_name"]);
-         array_push($second_name_tuteur, $row["second_name"]);
-         array_push($schoolyear, $row["schoolyear"]);
+   $sql_class = "SELECT id, name, schoolyear FROM classes where id = " . $class_id_selector[0] . "";
+
+   $result_class = $mysqli->query($sql_class);
+
+   if ($result_class->num_rows > 0) {
+      while($row = $result_class->fetch_assoc()) {
+   
+         array_push($id_class, $row["id"]);
+         array_push($name_class, $row["name"]);
       }
    } else {
      echo "0 results";
    }
 
+// select house
+   $id_houses_selector = array();
+   $houses_id_selector = array();
+
+   
+   $sql_houses_selector = "SELECT id, classes_id, house_id FROM classes_houses where house_id = " . $link_value . "";
+   $result_houses_selector = $mysqli->query($sql_houses_selector);
+   
+   if ($result_houses_selector->num_rows > 0) {
+      while($row = $result_houses_selector->fetch_assoc()) {
+   
+         array_push($id_houses_selector, $row["id"]);
+         array_push($houses_id_selector, $row["house_id"]);
+      }
+   } else {
+     echo "0 results";
+   }
+   
+   $id_houses = array();
+   $name_houses = array();
+   
+   $sql_houses = "SELECT id, name, schoolyear FROM houses where id = " . $houses_id_selector[0] . "";
+
+   $result_houses = $mysqli->query($sql_houses);
+
+   if ($result_houses->num_rows > 0) {
+      while($row = $result_houses->fetch_assoc()) {
+   
+         array_push($id_houses, $row["id"]);
+         array_push($name_houses, $row["name"]);
+      }
+   } else {
+     echo "0 results";
+   }
 
    $id_timetable  = array();
    $student_id = array();
@@ -110,7 +179,7 @@
 
    $sql_timetable = "SELECT id, student_id, entreprise_id, plage_1, plage_2, plage_3, plage_4, plage_5, plage_6, plage_7, plage_8, schoolyear FROM student_entreprise where student_id = " . $link_value . "";
    $result_timetable = $mysqli->query($sql_timetable);
-   
+
    if ($result_timetable->num_rows > 0) {
      // output data of each row
      while($row = $result_timetable->fetch_assoc()) {
@@ -362,22 +431,22 @@
                <div id=info_sheet class="info_sheet">
                   <div class="first_textfield">
                      <li id="name_field">
-                        Name: Lou Sergonne
+                        <!-- Name: Lou Sergonne -->
                      </li>
                      <li id="iam_field">
-                        iam:
-                     </li id="class_field">
-                     <li>
-                        Class: 4C2
+                        <!-- iam: -->
+                     </li>
+                     <li id="class_field">
+                        <!-- Class: 4C2 -->
                      </li>
                      <li id="house_field">
-                        House: Larochette
+                        <!-- House: Larochette -->
                      </li>
                      <li id="units_field">
-                        Units: 4, chelsea; 4 lite = OK
+                        <!-- Units: 4, chelsea; 4 lite = OK -->
                      </li>
                      <li  id="tuteur_field">
-                        Tuteur: Alex Bara
+                        <!-- Tuteur: Alex Bara -->
                      </li>
                   </div>
                   
@@ -387,10 +456,11 @@
                               const first_name = <?php echo json_encode($first_name); ?>;
                               const second_name = <?php echo json_encode($second_name); ?>;
                               const iam = <?php echo json_encode($iam); ?>;
-                              const house = <?php echo json_encode($house); ?>;
-
-                              const first_name_tuteur = <?php echo json_encode($first_name_tuteur); ?>;
-                              const second_name_tuteur = <?php echo json_encode($second_name_tuteur); ?>;
+                              const house = <?php echo json_encode($name_houses); ?>;
+                              const classes = <?php echo json_encode($name_class); ?>;
+// // import class
+//                               const first_name_tuteur = <?php // echo json_encode($first_name_tuteur); ?>;
+                              // const second_name_tuteur = <?php // echo json_encode($second_name_tuteur); ?>;
 
                               const name_field = document.getElementById("name_field");
                               const iam_field = document.getElementById("iam_field");
@@ -401,12 +471,12 @@
 
                               // insert links to class, house, and tuteur 
 
-                              name_field.insertAdjacentHTML(`<p>${name_field}</p>`)
-                              iam_field.insertAdjacentHTML(`<p>${iam_field}</p>`)
-                              class_field.insertAdjacentHTML(`<a>${class_field}</p>`)
-                              house_field.insertAdjacentHTML(`<p>${house_field}</p>`)
-                              units_field.insertAdjacentHTML(`<p>${units_field}</p>`)
-                              tuteur_field.insertAdjacentHTML(`<p>${tuteur_field}</p>`)
+                              name_field.insertAdjacentHTML("afterbegin", `<p>Name: ${first_name[0]} ${second_name[0]}</p>`)
+                              iam_field.insertAdjacentHTML("afterbegin", `<p>IAM: ${iam[0]}</p>`)
+                              class_field.insertAdjacentHTML("afterbegin", `<a>class: ${classes[0]}</p>`)
+                              house_field.insertAdjacentHTML("afterbegin", `<p>house: ${house[0]}</p>`)
+                              // units_field.insertAdjacentHTML("afterbegin", `<p>${units_field}</p>`)
+                              // tuteur_field.insertAdjacentHTML("afterbegin", `<p>tuteur: ${first_name_tuteur} ${second_name_tuteur}</p>`)
 
 
 
