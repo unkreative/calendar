@@ -21,7 +21,7 @@
    }
    
    $link_value = $_GET['student_id'];
-   echo $link_value;
+
 
    // echo 'Success: A proper connection to MySQL was made.';
    // echo '<br>';
@@ -37,7 +37,6 @@
    $schoolyear = array();
    
    $sql = "SELECT id, first_name, second_name, iam, schoolyear FROM students where id = " . $link_value . "";
-   echo $sql;
    $result = $mysqli->query($sql);
    
    if ($result->num_rows > 0) {
@@ -55,50 +54,50 @@
      echo "0 results";
    }
 
-   // $id_tuteur_selector = array();
-   // $tuteur_id = array();
+
+   // get the tuteur info
+   $id_tuteur_selector = array();
+   $tuteur_id = array();
 
    
-   // $sql_tuteur_selector = "SELECT id, student_id, tuteur_id, schoolyear FROM tuteur_student where student_id = " . $link_value . "";
-   // $result_tuteur_selector = $mysqli->query($sql_tuteur_selector);
+   $sql_tuteur_selector = "SELECT id, student_id, tuteur_id, schoolyear FROM tuteur_student where student_id = " . $link_value . "";
+   $result_tuteur_selector = $mysqli->query($sql_tuteur_selector);
    
-   // if ($result_tuteur_selector->num_rows > 0) {
-   //    while($row = $result_tuteur_selector->fetch_assoc()) {
+   if ($result_tuteur_selector->num_rows > 0) {
+      while($row = $result_tuteur_selector->fetch_assoc()) {
+         array_push($id_tuteur_selector, $row["id"]);
+         array_push($tuteur_id, $row["tuteur_id"]);
+      }
+   } else {
+     echo "0 results";
+   }
    
-   //       array_push($id_tuteur_selector, $row["id"]);
-   //       array_push($tuteur_id, $row["tuteur_id"]);
-   //    }
-   // } else {
-   //   echo "0 results";
-   // }
-   
-   // $id_tuteur = array();
-   // $first_name_tuteur = array();
-   // $second_name_tuteur = array();
-   // $schoolyear = array();
+   $id_tuteur = array();
+   $first_name_tuteur = array();
+   $second_name_tuteur = array();
+   $schoolyear = array();
 
+   $sql_tuteur = "SELECT id, first_name, second_name, house, entreprise, schoolyear FROM tuteur where id = " . $tuteur_id[0] . "";
+   $result_tuteur = $mysqli->query($sql_tuteur);
 
-   // $sql_tuteur = "SELECT id, first_name, second_name, house, entreprise, schoolyear FROM tuteur where id = " . $tuteur_id_selector . "";
-   // $result_tuteur = $mysqli->query($sql_tuteur);
-
-   // if ($result_tuteur->num_rows > 0) {
-   //    while($row = $result_tuteur->fetch_assoc()) {
+   if ($result_tuteur->num_rows > 0) {
+      while($row = $result_tuteur->fetch_assoc()) {
    
-   //       array_push($id_tuteur, $row["id"]);
-   //       array_push($first_name_tuteur, $row["first_name"]);
-   //       array_push($second_name_tuteur, $row["second_name"]);
-   //       array_push($schoolyear, $row["schoolyear"]);
-   //    }
-   // } else {
-   //   echo "0 results";
-   // }
+         array_push($id_tuteur, $row["id"]);
+         array_push($first_name_tuteur, $row["first_name"]);
+         array_push($second_name_tuteur, $row["second_name"]);
+         array_push($schoolyear, $row["schoolyear"]);
+      }
+   } else {
+     echo "0 results";
+   }
 
 
    $id_class_selector = array();
    $class_id_selector = array();
 
    
-   $sql_class_selector = "SELECT id, student_id, classes_id FROM students_classes where student_id = " . $link_value . "";
+   $sql_class_selector = "SELECT id, classes_id FROM students_classes where student_id = " . $link_value . "";
    $result_class_selector = $mysqli->query($sql_class_selector);
    
    if ($result_class_selector->num_rows > 0) {
@@ -114,9 +113,6 @@
    $id_class = array();
    $name_class = array();
    
-   echo "<br>";
-   echo $class_id_selector[0];
-   echo "<br>";
    $sql_class = "SELECT id, name, schoolyear FROM classes where id = " . $class_id_selector[0] . "";
 
    $result_class = $mysqli->query($sql_class);
@@ -136,7 +132,7 @@
    $houses_id_selector = array();
 
    
-   $sql_houses_selector = "SELECT id, classes_id, house_id FROM classes_houses where house_id = " . $link_value . "";
+   $sql_houses_selector = "SELECT id, classes_id, house_id FROM classes_houses where classes_id = " . $class_id_selector[0] . "";
    $result_houses_selector = $mysqli->query($sql_houses_selector);
    
    if ($result_houses_selector->num_rows > 0) {
@@ -331,6 +327,7 @@
          p {
          font-size: 17px;
          padding-right: 5px;
+         color: black;
          }
          .container {
          display: flex; 
@@ -426,6 +423,12 @@
          font-size: 20px;
          padding-left: 30px; 
          }
+         .no_link {
+            font-size: 17px;
+
+            text-decoration: none;
+            color: black;
+         }
       </style>
    <body style="margin-bottom: 50px;">
       <div id="navbar"></div>
@@ -464,8 +467,8 @@
                               const house = <?php echo json_encode($name_houses); ?>;
                               const classes = <?php echo json_encode($name_class); ?>;
 // // import class
-//                               const first_name_tuteur = <?php // echo json_encode($first_name_tuteur); ?>;
-                              // const second_name_tuteur = <?php // echo json_encode($second_name_tuteur); ?>;
+                              const first_name_tuteur = <?php echo json_encode($first_name_tuteur); ?>;
+                              const second_name_tuteur = <?php echo json_encode($second_name_tuteur); ?>;
 
                               const name_field = document.getElementById("name_field");
                               const iam_field = document.getElementById("iam_field");
@@ -476,12 +479,12 @@
 
                               // insert links to class, house, and tuteur 
 
-                              name_field.insertAdjacentHTML("afterbegin", `<p>Name: ${first_name[0]} ${second_name[0]}</p>`)
-                              iam_field.insertAdjacentHTML("afterbegin", `<p>IAM: ${iam[0]}</p>`)
-                              class_field.insertAdjacentHTML("afterbegin", `<a>class: ${classes[0]}</p>`)
-                              house_field.insertAdjacentHTML("afterbegin", `<p>house: ${house[0]}</p>`)
-                              // units_field.insertAdjacentHTML("afterbegin", `<p>${units_field}</p>`)
-                              // tuteur_field.insertAdjacentHTML("afterbegin", `<p>tuteur: ${first_name_tuteur} ${second_name_tuteur}</p>`)
+                              name_field.insertAdjacentHTML("afterbegin", `<p>Name: ${first_name[0]} ${second_name[0]}</p>`);
+                              iam_field.insertAdjacentHTML("afterbegin", `<p>IAM: ${iam[0]}</p>`);
+                              class_field.insertAdjacentHTML("afterbegin", `<a class="no_link" href="/pages/classes.php?class_id=${<?php echo $class_id_selector[0] ?>}">Class: ${classes[0]}</p>`);
+                              house_field.insertAdjacentHTML("afterbegin", `<p>House: ${house[0]}</p>`);
+
+                              tuteur_field.insertAdjacentHTML("afterbegin", `<p>Tuteur: ${first_name_tuteur} ${second_name_tuteur}</p>`)
 
 
 
@@ -629,6 +632,7 @@
                               
                               const timetable = <?php echo json_encode($timetable_dates); ?>;
                               
+                              var units_present = 0;
 
                               // console.log(plage_1);
                               // console.log(plage_2);
@@ -642,15 +646,18 @@
                               var plage_arr = [plage_1, plage_2, plage_3, plage_4, plage_5, plage_6, plage_7, plage_8];
                               var plage_arr_day = [plage_1_day, plage_2_day, plage_3_day, plage_4_day, plage_5_day, plage_6_day, plage_7_day, plage_8_day];
                               var plage_arr_plage = [plage_1_plage, plage_2_plage, plage_3_plage, plage_4_plage, plage_5_plage, plage_6_plage, plage_7_plage, plage_8_day];
-                              console.log(plage_arr);
+                              // console.log(plage_arr);
 
                               var index = 0;
                               for (const element of plage_arr) {
                                  
                                  let day = plage_arr_day[index];
                                  let plage = plage_arr_plage[index];
-                                 console.log(plage);
-                                 console.log(day);
+
+                                 // console.log("plage ",plage);
+                                 // console.log("day ", day);
+                                 // console.log("day_arr ", plage_arr_day);
+
 
                                  // current fix for test data 
                                  if (day > 5){
@@ -685,9 +692,12 @@
                                  }
                                  else {
                                  console.log("else");
-
+                                 
+                                 units_present ++;
+                                 
                                  var cell = document.getElementById(`sched-${plage}-${day}`);
-                                 console.log(`sched-${day}-${plage}`)
+                                 // console.log(`sched-${day}-${plage}`)
+                                 // console.log(cell)
 
                                  // let cell = document.getelementbyid(`sched-${day}-${plage}`);
 
@@ -697,6 +707,11 @@
                               index ++;
                            
                            };
+                           let units_status = "ok"
+                           if (units_present < 8) {
+                              units_status = "not ok";
+                           };
+                           units_field.insertAdjacentHTML("afterbegin", `<p>Units: ${units_present} = ${units_status}</p>`);
 
                   </script>
 
