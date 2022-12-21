@@ -142,10 +142,10 @@ p {
   font-size: 17px;
   padding-right: 5px;
 }
-.container {
+.container2 {
   display: flex; 
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 12.5% !important;
+  margin-right: 12.5% !important;
   flex-wrap: wrap;
   overflow: hidden;
 
@@ -242,7 +242,7 @@ p {
     <script src="/scripts/navbar.js"></script>
 
 
-    <div id="body" class="container">
+    <div id="body" class="container2">
     
 
     <div id="main_box" class="containerr">

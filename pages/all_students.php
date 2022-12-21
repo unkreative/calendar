@@ -125,14 +125,23 @@ p {
   font-size: 17px;
   padding-right: 5px;
 }
-.container {
+.w100 {
+  width:  75% !important;
+
+}
+.container2 {
+  width:  75% !important;
+
+  /* width:  100vw !important; */
   display: flex; 
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 12.5% !important;
+  margin-right: 12.5% !important;
+
   flex-wrap: wrap;
   overflow: hidden;
 
 }
+
 .item {
   order: 5; /* default is 0 */
   margin: 10px;
@@ -185,6 +194,7 @@ p {
    /* display: block; */
 }
 .containerr {
+
   overflow: hidden;
   display: flex; 
   margin-left: 0px;
@@ -218,14 +228,15 @@ p {
 }
 
     </style>
-<body style="margin-bottom: 50px;">
+    <body style="margin-bottom: 50px;">
     
+    <!-- navbar -->
     <div id="navbar"></div>
     <script src="/scripts/navbar.js"></script>
 
-  <!-- <div class="container"> -->
-
-    <div id="body" class="container">
+<!-- acutal content -->
+    <div id="body" class="w100 container2">
+    <!-- <div id="body"> -->
     
       <div id="myBtnContainer">  
         <!-- <button class="btnn active" onclick="filterSelection('all')"> Show all</button> -->
@@ -237,6 +248,7 @@ p {
       </div>
       
     <div id="main_box" class="containerr">
+    <!-- <div id="main_box"> -->
 
       <!-- houses -->
       <script>
