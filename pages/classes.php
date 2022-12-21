@@ -91,6 +91,36 @@ if ($result_student->num_rows > 0) {
   echo "0 results";
 }
 // echo $first_name_student[0];
+
+// TODO input rooms, and entreprises
+$sql_student = "SELECT id, first_name, second_name, iam, schoolyear FROM students WHERE id IN (" . $student_id_txt . ")";
+
+$result_student = $mysqli->query($sql_student);
+
+$id_student = array();
+$first_name_student = array();
+$second_name_student = array();
+$iam_student = array();
+$schoolyear_student = array();
+
+
+if ($result_student->num_rows > 0) {
+  // output data of each row
+  while($row = $result_student->fetch_assoc()) {
+    array_push($id_student, $row["id"]);
+    array_push($first_name_student, $row["first_name"]);
+    array_push($second_name_student, $row["second_name"]);
+    array_push($iam_student, $row["iam"]);
+    array_push($schoolyear_student, $row["schoolyear"]);
+
+
+    // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+
+
 $mysqli->close();
 
 

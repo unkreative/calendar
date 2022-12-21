@@ -69,7 +69,7 @@
          array_push($tuteur_id, $row["tuteur_id"]);
       }
    } else {
-     echo "0 results";
+     echo "01 results ";
    }
    
    $id_tuteur = array();
@@ -89,7 +89,7 @@
          array_push($schoolyear, $row["schoolyear"]);
       }
    } else {
-     echo "0 results";
+     echo "02 results";
    }
 
 
@@ -107,7 +107,7 @@
          array_push($class_id_selector, $row["classes_id"]);
       }
    } else {
-     echo "0 results";
+     echo "03 results";
    }
    
    $id_class = array();
@@ -124,7 +124,7 @@
          array_push($name_class, $row["name"]);
       }
    } else {
-     echo "0 results";
+     echo "04 results";
    }
 
 // select house
@@ -142,7 +142,7 @@
          array_push($houses_id_selector, $row["house_id"]);
       }
    } else {
-     echo "0 results";
+     echo "05 results";
    }
    
    $id_houses = array();
@@ -159,7 +159,7 @@
          array_push($name_houses, $row["name"]);
       }
    } else {
-     echo "0 results";
+     echo "06 results";
    }
 
    $id_timetable  = array();
@@ -202,7 +202,7 @@
        // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
      }
    } else {
-     echo "0 results";
+     echo "07 results";
    }
    $timetable_dates = array();
 

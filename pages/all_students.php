@@ -275,7 +275,7 @@ p {
 
         //  for id, write name in main_box div
         for (let i = 0; i < id_student.length; i++) {
-          main_box.insertAdjacentHTML("afterbegin",`      <a href="student?student=${id_student[i]}" class="filterDiv eleves">${first_name_student[i]} ${second_name_student[i]}</a>`)
+          main_box.insertAdjacentHTML("afterbegin",`      <a href="student.php?student=${id_student[i]}" class="filterDiv eleves">${first_name_student[i]} ${second_name_student[i]}</a>`)
         }
 
       </script>
