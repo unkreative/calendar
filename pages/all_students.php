@@ -261,7 +261,7 @@ p {
       //  for id, write name in main_box div
       const main_box = document.getElementById("main_box")
       for (let i = 0; i < id_houses.length; i++) {
-        main_box.insertAdjacentHTML("afterbegin",`      <a href="classes.php?classes_id=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
+        main_box.insertAdjacentHTML("afterbegin",`      <a href="houses.php?houses_id=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
       }
       </script>
       <!-- classes -->

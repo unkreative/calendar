@@ -1,0 +1,12 @@
+TODO:
+- free hours
+    - Free hours fier klassen man
+    - dat dann importeiren an displayen
+
+- currently here
+    - currently here sachen man
+
+- fix import arr, has some sort of bug where the arrays arent pushed trough
+- make houses.php? no idea why this isnt done but it has to be there
+
+- make a database called, classes-free hours, with the freehours of that class
