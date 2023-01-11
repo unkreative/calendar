@@ -1,7 +1,7 @@
 <!doctype html>
 
 <?php
-require "../scripts/import_db_array";
+require "../scripts/import_db_array.php";
 
   $db_host = 'localhost';
   $db_user = 'root';

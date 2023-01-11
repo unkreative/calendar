@@ -1,8 +1,6 @@
-<!-- import data what student should be there, and the names and links for the students -->
 <?php
-require "../scripts/import_db_array";
-
-$link_value = $_GET['classes_id'];
+require "../scripts/import_db_array.php";
+$link_value = $_GET["classes_id"];
 
 // import timetable
 $id = array();
@@ -26,30 +24,43 @@ $interval = $result_timetable[1][1];
 $day_id = $result_timetable[2][1];
 $schoolyear = $result_timetable[3][1];
 
-// import student data
-$id_student = array();
-$first_name_student = array();
-$second_name_student = array();
-$iam_student = array();
-$schoolyear_student = array();
+// import class
+$id_class = array();
+$name_class = array();
 
-$id_student_cache = array("id",$id_student);
-$first_name_student_cache = array("first_name",$first_name_student);
-$second_name_student_cache = array("second_name",$second_name_student);
-$iam_student_cache = array("iam",$iam_student);
-$schoolyear_student_cache = array("schoolyear",$schoolyear_student);
+$arr_class = array(
+    array("id", $id),
+    array("name", $name_class)
+);
 
-$arr_student = array($id_student_cache,$first_name_student_cache,$second_name_student_cache,$iam_student_cache,$schoolyear_student_cache);
+$sql_class = "SELECT id, name FROM classes WHERE id = " . $link_value . "";
 
-$sql_student = "SELECT id, first_name, second_name, iam, schoolyear FROM students";
+$result_class = import_arr($sql_class, $arr_class);
 
-$result_student = import_arr($sql_student, $arr_student);
+$id_class = $result_class[0][1];
+$name_class = $result_class[1][1];
 
-$id_student = $result_student[0][1];
-$first_name_student = $result_student[1][1];
-$second_name_student = $result_student[2][1];
-$iam_student = $result_student[3][1];
-$schoolyear_student = $result_student[4][1];
+// import class free hours data
+$id = array();
+$class_id = array();
+$free_hour1 = array();
+$free_hour2 = array();
+
+$arr_classes_free_hours = array(
+    array("id", $id ),
+    array("class_id", $class_id),
+    array("free_hour1", $free_hour1),
+    array("free_hour2", $free_hour2)
+);
+
+$sql_selector_classes_free_hours = "SELECT `id`, `class_id`, `free_hour1`, `free_hour2` FROM classes_free_hours WHERE class_id = " . $link_value . "";
+
+$result_classes_free_hours = import_arr($sql_selector_classes_free_hours, $arr_classes_free_hours);
+
+$id = $result_classes_free_hours[0][1];
+$class_id = $result_classes_free_hours[1][1];
+$free_hour1 = $result_classes_free_hours[2][1];
+$free_hour2 = $result_classes_free_hours[3][1];
 
 ?>
 
@@ -287,11 +298,10 @@ $schoolyear_student = $result_student[4][1];
 
 <!-- the compartement where the active students are displayed -->
 <div class="big_box">
-
     <div style="scale: 1">
+        <p>class: <?php echo $name_class[0]; ?></p>
+
         <div class="calendar">
-
-
             <div class="row" style="order: 1;">
                 <div class="header_tile txt"></div>
                 <div class="header_tile txt">Lundi</div>
@@ -302,86 +312,66 @@ $schoolyear_student = $result_student[4][1];
             </div>
 
             <div class="row" style="order: 2;">
-                <div class="dark_tile big_tile txt">
-                    8:10 - 9:40
-                </div>
-
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
+                <div class="dark_tile big_tile txt" id="sched-1-0">8:10 - 9:40</div>
+                <div class="dark_tile big_tile txt" id="sched-1-1"></div>
+                <div class="dark_tile big_tile txt" id="sched-1-2"></div>
+                <div class="dark_tile big_tile txt" id="sched-1-3"></div>
+                <div class="dark_tile big_tile txt" id="sched-1-4"></div>
+                <div class="dark_tile big_tile txt" id="sched-1-5"></div>
             </div>
 
             <div class="row" style="order: 3;">
-                <div class="light_tile big_tile txt">
-                    10:10 - 11:40
-                </div>
-
-                <div class="light_tile big_tile txt"></div>
-                <div class="light_tile big_tile txt"></div>
-                <div class="light_tile big_tile txt"></div>
-                <div class="light_tile big_tile txt"></div>
-                <div class="light_tile big_tile txt"></div>
+                <div class="light_tile big_tile txt" id="sched-2-0">10:10 - 11:40</div>
+                <div class="light_tile big_tile txt" id="sched-2-1"></div>
+                <div class="light_tile big_tile txt" id="sched-2-2"></div>
+                <div class="light_tile big_tile txt" id="sched-2-3"></div>
+                <div class="light_tile big_tile txt" id="sched-2-4"></div>
+                <div class="light_tile big_tile txt" id="sched-2-5"></div>
             </div>
 
             <div class="row" style="order: 4;">
-                <div class="dark_tile liddle_tile txt">
-                    11:45 - 12:30
-                </div>
-
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-3-0">11:45 - 12:30</div>
+                <div class="dark_tile liddle_tile txt" id="sched-3-1"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-3-2"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-3-3"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-3-4"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-3-5"></div>
             </div>
-
+            
             <div class="row" style="order: 5;">
-                <div class="light_tile liddle_tile txt">
-                    12:30 - 13:15
-                </div>
-
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
+                <div class="light_tile liddle_tile txt" id="sched-4-0">12:30 - 13:15</div>
+                <div class="light_tile liddle_tile txt" id="sched-4-1"></div>
+                <div class="light_tile liddle_tile txt" id="sched-4-2"></div>
+                <div class="light_tile liddle_tile txt" id="sched-4-3"></div>
+                <div class="light_tile liddle_tile txt" id="sched-4-4"></div>
+                <div class="light_tile liddle_tile txt" id="sched-4-5"></div>
             </div>
-
+            
             <div class="row" style="order: 6;">
-                <div class="dark_tile liddle_tile txt">
-                    13:15 - 14:00
-                </div>
-
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
-                <div class="dark_tile liddle_tile txt"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-5-0">13:15 - 14:00</div>
+                <div class="dark_tile liddle_tile txt" id="sched-5-1"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-5-2"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-5-3"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-5-4"></div>
+                <div class="dark_tile liddle_tile txt" id="sched-5-5"></div>
+            </div>
+            
+            <div class="row" style="order: 7;">
+                <div class="light_tile liddle_tile txt" id="sched-6-0">14:00 - 14:45</div>
+                <div class="light_tile liddle_tile txt" id="sched-6-1"></div>
+                <div class="light_tile liddle_tile txt" id="sched-6-2"></div>
+                <div class="light_tile liddle_tile txt" id="sched-6-3"></div>
+                <div class="light_tile liddle_tile txt" id="sched-6-4"></div>
+                <div class="light_tile liddle_tile txt" id="sched-6-5"></div>
             </div>
 
             <div class="row" style="order: 8;">
-                <div class="light_tile liddle_tile txt">
-                    14:00 - 14:45
-                </div>
-
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-                <div class="light_tile liddle_tile txt"></div>
-            </div>
-
-            <div class="row" style="order: 9;">
-                <div class="dark_tile big_tile txt">
-                    14:50 - 16:20
-                </div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
-                <div class="dark_tile big_tile txt"></div>
+                <div class="dark_tile big_tile txt" id="sched-7-0">14:50 - 16:20</div>
+                <div class="dark_tile big_tile txt" id="sched-7-1"></div>
+                <div class="dark_tile big_tile txt" id="sched-7-2"></div>
+                <div class="dark_tile big_tile txt" id="sched-7-3"></div>
+                <div class="dark_tile big_tile txt" id="sched-7-4"></div>
+                <div class="dark_tile big_tile txt" id="sched-7-5"></div>
             </div>
 
         </div>
@@ -394,135 +384,44 @@ $schoolyear_student = $result_student[4][1];
     const interval = <?php echo json_encode($interval); ?>;
     const day_id = <?php echo json_encode($day_id); ?>;
 
-    // import entreprise students
-    // const id_student_entreprise = <?php // echo json_encode($id_student_entreprise ); ?>;
-    // const student_id = <?php // echo json_encode($student_id); ?>;
-    // const entreprise_id = <?php // echo json_encode($entreprise_id); ?>;
-    // const plage_1 = <?php // echo json_encode($plage_1); ?>;
-    // const plage_2 = <?php // echo json_encode($plage_2); ?>;
-    // const plage_3 = <?php // echo json_encode($plage_3); ?>;
-    // const plage_4 = <?php // echo json_encode($plage_4); ?>;
-    // const plage_5 = <?php // echo json_encode($plage_5); ?>;
-    // const plage_6 = <?php // echo json_encode($plage_6); ?>;
-    // const plage_7 = <?php // echo json_encode($plage_7); ?>;
-    // const plage_8 = <?php // echo json_encode($plage_8)// ; ?>;
 
+    const id = <?php echo json_encode($id); ?>;
+    const class_id = <?php echo json_encode($class_id); ?>;
+    const free_hour1 = <?php echo json_encode($free_hour1); ?>;
+    const free_hour2 = <?php echo json_encode($free_hour2); ?>;
 
-    // import plages
-    const id_student_entreprise = <?php echo json_encode($id_student_entreprise); ?>;
-    const student_id = <?php echo json_encode($student_id); ?>;
-    const entreprise_id = <?php echo json_encode($entreprise_id); ?>;
+    let free_hour1_new = free_hour1[0].split("-");
+    let day_free_hour_1 = free_hour1_new[1];
+    let plage_free_hour_1 = free_hour1_new[0];
 
-    let plage_1 = <?php echo json_encode($plage_1); ?>;
-    let plage_2 = <?php echo json_encode($plage_2); ?>;
-    let plage_3 = <?php echo json_encode($plage_4); ?>;
-    let plage_4 = <?php echo json_encode($plage_3); ?>;
-    let plage_5 = <?php echo json_encode($plage_5); ?>;
-    let plage_6 = <?php echo json_encode($plage_6); ?>;
-    let plage_7 = <?php echo json_encode($plage_7); ?>;
-    let plage_8 = <?php echo json_encode($plage_8); ?>;
+    let free_hour2_new = free_hour2[0].split("-");
+    let day_free_hour_2 = free_hour2_new[1];
+    let plage_free_hour_2 = free_hour2_new[0];
 
-    const plage_1_ = plage_1[0].split("-");
-    const plage_1_day = plage_1_[1];
-    const plage_1_plage = plage_1_[0];
+    // failsafe if test data is bad
+    if (day_free_hour_1 > 5){
+        day_free_hour_1 = day_free_hour_1-5;
+    };     
+    if (day_free_hour_2 > 5){
+        day_free_hour_2 = day_free_hour_2-5;
+    };
 
-
-    const plage_2_ = plage_2[0].split("-");
-    const plage_2_day = plage_2_[1];
-    const plage_2_plage = plage_2_[0];
-
-
-    const plage_3_ = plage_3[0].split("-");
-    const plage_3_day = plage_3_[1];
-    const plage_3_plage = plage_3_[0];
-
-
-    const plage_4_ = plage_4[0].split("-");
-    const plage_4_day = plage_4_[1];
-    const plage_4_plage = plage_4_[0];
-
-
-    const plage_5_ = plage_5[0].split("-");
-    const plage_5_day = plage_5_[1];
-    const plage_5_plage = plage_5_[0];
-
-
-    const plage_6_ = plage_6[0].split("-");
-    const plage_6_day = plage_6_[1];
-    const plage_6_plage = plage_6_[0];
-
-
-    const plage_7_ = plage_7[0].split("-");
-    const plage_7_day = plage_7_[1];
-    const plage_7_plage = plage_7_[0];
-
-    const plage_8_ = plage_8[0].split("-");
-    const plage_8_day = plage_8_[1];
-    const plage_8_plage = plage_8_[0];
-
-    const schoolyear = <?php echo json_encode($schoolyear_timetable); ?>;
-
-    // const timetable = <?php // echo json_encode($timetable_dates); ?>;
-
-
-    // function getDayName(dateStr, locale){
-    //     var date = new Date(dateStr);
-    //     return date.toLocaleDateString(locale, { weekday: 'long' });        
-    // };
-
-
-    // function get_plage(){
-        
-    //     var currentTime = new Date();
-    //     var day = getDayName(currentTime, "en-GB");
-
-    //     // select day
-    //     var day_id_selector = 0;
-        
-    //     var weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    //     var weekdays_id = [1,2,3,4,5,0,0];
-        
-    //     for (let i = 0; i < weekdays.length; i++) {
-    //         if (weekdays[i] == day){
-    //             console.log(weekdays[i], weekdays_id[i])
-    //             day_id_selector = weekdays_id[i]
-    //     }};
-
-    //     // find the interval currenty in
-    //     var plage = 0    
-    //     console.log(interval)
-
-    //     for (let ii = 0; ii < interval.length; ii++){
-    //         var interval_i = interval[ii].split("-");
-    //         var startTime = `${interval_i[0]}`;
-    //         var endTime = `${interval_i[1]}`;
-        
-    //         // var startTime = '15:10:10';
-    //         // var endTime = '22:30:00';
-            
-    //         currentDate = new Date()
-    //         console.log(startTime, endTime,currentDate)
+    if (plage_free_hour_1 > 7){
+        plage_free_hour_1 = plage_free_hour_1-5;
+    };           
     
-    //         startDate = new Date(currentDate.getTime());
-    //         startDate.setHours(startTime.split(":")[0]);
-    //         startDate.setMinutes(startTime.split(":")[1]);
+    if (plage_free_hour_2 > 7){
+        plage_free_hour_2 = plage_free_hour_2-5;
+    };
+    
+    var cell_hour1 = document.getElementById(`sched-${plage_free_hour_1}-${day_free_hour_1}`);
+    console.log(cell_hour1);
+    cell_hour1.insertAdjacentHTML("afterbegin", `<i class="fa-solid fa-check" style="scale: 2; color: #39FF14;"></i>`);
 
-    //         endDate = new Date(currentDate.getTime());
-    //         endDate.setHours(endTime.split(":")[0]);
-    //         endDate.setMinutes(endTime.split(":")[1]);
+    var cell_hour2 = document.getElementById(`sched-${plage_free_hour_2}-${day_free_hour_2}`);
 
-    //         valid = startDate < currentDate && endDate > currentDate
-    //         console.log(valid)
-    //         if (valid == "True"){
-    //             plage = ii
-    //         }
-    //     }
-    // };
-            
-    // get_plage()
+    cell_hour2.insertAdjacentHTML("afterbegin", `<i class="fa-solid fa-check" style="scale: 2; color: #39FF14;"></i>`);
 
-    let selector = `${plage}-${day_id_selector}`
-    console.log(selector)
 
 </script>
 

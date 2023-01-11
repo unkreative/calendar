@@ -68,70 +68,13 @@ function import_arr($sql_selector, $keys_arrays)
             }
         }
         else {
-            echo "0 results";
+            // echo "0 results";
         }
         // echo "<br><br><br><br><br><br><br><br><br>checkpoint<br><br><br><br><br><br><br>";
         // push the cached array into keys
         
     return $keys_arrays;
 
-    /*
-    foreach ($keys_arrays as $key => $cache) {
-        print_r($keys_arrays);
-        echo "<br>";
-        print_r($cache);
-        print_r($key);
-        echo "key cache<br>";
-        if ($result->num_rows > 0) {
-            // output data of each row
-            // print_r($keys_arrays);
-            
-            
-            while ($row = $result->fetch_assoc()) {
-                // echo $cache[1] ." 1 <br>";
-                // echo $cache[0] . " 0 <br>";
-                // echo "$cache[0] <br>";
-                array_push($cache[1], $row["$cache[0]"]);
-                
-                // print_r($cache[1]);
-                // print_r($cache[1]);
-                // echo "<br>";
-                //     foreach ($cache[1] as $key => $value) {
-                //         echo $value;
-                //         # code...
-                // };
-                // array_replace($keys_arrays[$index], $cache[1]);
-                // echo "<br> keys array ";
-                // print_r($keys_arrays);
-                // echo "<br>index $index<br>";
-                // print_r($keys_arrays);
-                // echo "<br>";
-                
-            }
-            ;
-            // echo $index;
-            // echo "<br>cache 1 ";
-            // print_r($cache[1]);
-            // echo "<br>cache 1 ";
-            // print_r($keys_arrays);
-            
-            // push the cached array into keys
-            foreach ($cache[1] as $variable) {
-                print_r($variable);
-                // echo "<br>";
-                array_push($keys_arrays[$index][1], $variable);
-            }
-            $index = $index + 1;
-        } else {
-            echo "0 results";
-        }
-        ;
-        // echo "<br> keys array ";
-        // print_r($keys_arrays);
-        // print_r($keys_arrays);
-        return $keys_arrays;
-    }
-    */
 }
 ;
 

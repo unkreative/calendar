@@ -25,7 +25,7 @@ if ($mysqli->connect_error) {
 // echo '<br>';
 // echo 'Protocol version: '.$mysqli->protocol_version;
 
-$link_value = $_GET['houses_id'];
+$link_value = $_GET['house_id'];
 // echo $link_value;
 
 
@@ -219,7 +219,7 @@ var schoolyear = <?php echo json_encode($schoolyear_classes); ?>;
 //  for id, write name in main_box div
 const main_box = document.getElementById("main_box")
 for (let i = 0; i < id_classes.length; i++) {
-  main_box.insertAdjacentHTML("afterbegin",`      <a class="filterDiv" href="classes.php?classes_id=${id_classes[i]}">${name_classes[i]}</a>`);
+  main_box.insertAdjacentHTML("afterbegin",`      <a class="filterDiv" href="free_hours_continue.php?classes_id=${id_classes[i]}">${name_classes[i]}</a>`);
 }
 
 </script>
