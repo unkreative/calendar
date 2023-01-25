@@ -1,5 +1,6 @@
 <?php
 require "../scripts/import_db_array.php";
+
 $link_value = $_GET["classes_id"];
 
 // import timetable
