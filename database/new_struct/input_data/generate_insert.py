@@ -1,4 +1,5 @@
 import re, os 
+import time 
 
 with open("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/input_data/output", "r") as f:
     fread = f.read()
@@ -71,11 +72,38 @@ with open("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/inpu
         day[3].pop(-1)
 
     for day in days:
-        for x in range(0, len(day)):
-            day[x] = [x for x in day[x] if x != '']
+        for item in range(0, len(day)):
+            if isinstance(day[item], list):
 
-            for x2 in day[x]:
-                x2 = [x for x in x2 if x != '']
+                print("OCCURENCE")
+                day[item] = [x for x in day[item] if x != '']
+
+                for x in range(0, len(day[item])):
+                    print(day[item])
+                    print(x)
+                    if "_" in day[item][x] and " " in day[item][x]:
+                        day[item][x] = day[item][x][:-1]
+                        # print(x)
+                        # time.sleep(0.5)
+                        day[item].insert(
+                            day[item].index(
+                                day[item][x]),
+                                "_"
+                                )
+            if isinstance(day[item], list):
+                if "_" in day[item][-1]:
+                    day[item].pop(-1)
+                    day[item].append("_")
+                if len(day[item]) == 1:
+                    pr
+                    day[item] = day[item][1]
+
+
+        
+
+
+
+                
 
     print("\n\n\n\n\n\n\n")
 
