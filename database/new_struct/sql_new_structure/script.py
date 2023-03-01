@@ -3,9 +3,9 @@ import sys, os, re
 def list_full_paths(directory):
     return [os.path.join(directory, file) for file in os.listdir(directory)]
 
-excluded_files = ['/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_new_structure/structure', '/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_new_structure/script.py', '/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_new_structure/.DS_Store']
+excluded_files = ['/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_new_structure/structure', '/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_new_structure/script.py', '/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_new_structure/.DS_Store'] 
 # dirs = os.listdir("/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_new_structure")
-dirs = list_full_paths("/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_new_structure")
+dirs = list_full_paths("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_new_structure")
 
 def remove_items(source_list, items_to_remove):
     for item in items_to_remove:
@@ -33,9 +33,9 @@ def file_replace(filepath, items_to_replace, items_to_replace_with):
 #     os.rename(file, tmp)
 
 def organise():
-    os.mkdir("/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_structure",)
-    with open("/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_structure/query", "w+") as f_query:
-        with open("/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_structure/structure", "w+") as f_structure:
+    os.mkdir("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_structure")
+    with open("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_structure/query", "w+") as f_query:
+        with open("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_structure/structure", "w+") as f_structure:
             f_structureread = f_structure.read()
             # print(type(fread))
             # print((fread))
@@ -87,7 +87,7 @@ def organise():
                     rebuilt_query = f"{query[0]} {query[1]} ({query[2][-1]}) {query[3]} ({query[4][-1]})"
                     print(rebuilt_query)
                     query_cache = query[1].replace("`", "")
-                    with open(f"/Users/lousergonne/Documents/GitHub/calendar/database/queries/sql_structure/{query_cache}", "w") as fwrite:
+                    with open(f"/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/sql_structure/{query_cache}", "w") as fwrite:
                         fwrite.write(rebuilt_query)
 
                     organised_values_inputs = ""
