@@ -1,0 +1,1 @@
+INSERT INTO `entreprise` (`id`, `name`, `CEO`, `year`) VALUES (0, 1, 2, 3)

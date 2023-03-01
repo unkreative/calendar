@@ -1,0 +1,1 @@
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (0, 1, 2, 3)

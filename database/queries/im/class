@@ -1,0 +1,1 @@
+INSERT INTO `class` (`id`, `name`, `house_id`, `year`) VALUES (NULL, NULL, '', '')

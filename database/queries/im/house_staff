@@ -1,0 +1,1 @@
+INSERT INTO `house_staff` (`id`, `house_id`, `staff_id`, `function`, `year`) VALUES (NULL, NULL, NULL, NULL, '')

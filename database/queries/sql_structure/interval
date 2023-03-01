@@ -1,0 +1,1 @@
+INSERT INTO `interval` (`id`, `start`, `end`) VALUES (0, 1, 2)
