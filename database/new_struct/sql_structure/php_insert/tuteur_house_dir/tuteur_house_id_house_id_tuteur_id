@@ -1,0 +1,23 @@
+
+// import tuteur_house
+
+$tuteur_house_id = array();
+$tuteur_house_house_id = array();
+$tuteur_house_tuteur_id = array();
+$tuteur_house_year = array();
+
+$arr_tuteur_house = array(
+  array("id", $tuteur_house_id),
+  array("house_id", $tuteur_house_house_id),
+  array("tuteur_id", $tuteur_house_tuteur_id),
+  array("year", $tuteur_house_year),
+);
+
+$sql_tuteur_house = "SELECT id, house_id, tuteur_id, year FROM tuteur_house WHERE id = ' . $link_value . ' AND house_id = ' . $link_value . ' AND tuteur_id = ' . $link_value . ';
+
+$result_tuteur_house = import_arr($sql_tuteur_house, $arr_tuteur_house);
+
+$tuteur_house_id = $result_tuteur_house[0][1];
+$tuteur_house_house_id = $result_tuteur_house[1][1];
+$tuteur_house_tuteur_id = $result_tuteur_house[2][1];
+$tuteur_house_year = $result_tuteur_house[3][1];

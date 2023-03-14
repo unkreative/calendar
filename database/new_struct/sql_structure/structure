@@ -121,3 +121,10 @@ name of table `days`
 
 <<INSERT INTO `days` (`id`, `name`) VALUES (0, 1)>>
 
+name of table `room` 
+  0 : `id`
+  1 : `name`
+  2 : `entreprise`
+  3 : `year`
+
+<<INSERT INTO `room` (`id`, `name`, `entreprise`, `year`) VALUES (1, 2, 3, 4)>>

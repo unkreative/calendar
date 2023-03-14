@@ -1,0 +1,23 @@
+
+// import timetable
+
+$timetable_id = array();
+$timetable_interval = array();
+$timetable_day = array();
+$timetable_year = array();
+
+$arr_timetable = array(
+  array("id", $timetable_id),
+  array("interval", $timetable_interval),
+  array("day", $timetable_day),
+  array("year", $timetable_year),
+);
+
+$sql_timetable = "SELECT id, interval, day, year FROM timetable WHERE day = ' . $link_value . ' AND year = ' . $link_value . ';
+
+$result_timetable = import_arr($sql_timetable, $arr_timetable);
+
+$timetable_id = $result_timetable[0][1];
+$timetable_interval = $result_timetable[1][1];
+$timetable_day = $result_timetable[2][1];
+$timetable_year = $result_timetable[3][1];

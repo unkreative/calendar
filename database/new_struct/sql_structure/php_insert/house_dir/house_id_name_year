@@ -1,0 +1,23 @@
+
+// import house
+
+$house_id = array();
+$house_name = array();
+$house_house_number = array();
+$house_year = array();
+
+$arr_house = array(
+  array("id", $house_id),
+  array("name", $house_name),
+  array("house_number", $house_house_number),
+  array("year", $house_year),
+);
+
+$sql_house = "SELECT id, name, house_number, year FROM house WHERE id = ' . $link_value . ' AND name = ' . $link_value . ' AND year = ' . $link_value . ';
+
+$result_house = import_arr($sql_house, $arr_house);
+
+$house_id = $result_house[0][1];
+$house_name = $result_house[1][1];
+$house_house_number = $result_house[2][1];
+$house_year = $result_house[3][1];

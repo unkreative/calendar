@@ -12,3 +12,4 @@ INSERT INTO `student_entreprise` (`id`, `student_id`, `entreprise_id`, `plage_1`
 INSERT INTO `student` (`id`, `first_name`, `second_name`, `iam`, `class_id`, `tuteur_id`, `year`) VALUES (0, 1, 2, 3, 4, 5, 6)
 INSERT INTO `entreprise_staff` (`id`, `staff_id`, `entreprise_id`, `post`, `year`) VALUES (0, 1, 2, 3, 4)
 INSERT INTO `days` (`id`, `name`) VALUES (0, 1)
+INSERT INTO `room` (`id`, `name`, `entreprise`, `year`) VALUES (1, 2, 3, 4)

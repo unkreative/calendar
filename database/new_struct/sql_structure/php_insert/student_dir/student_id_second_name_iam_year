@@ -1,0 +1,32 @@
+
+// import student
+
+$student_id = array();
+$student_first_name = array();
+$student_second_name = array();
+$student_iam = array();
+$student_class_id = array();
+$student_tuteur_id = array();
+$student_year = array();
+
+$arr_student = array(
+  array("id", $student_id),
+  array("first_name", $student_first_name),
+  array("second_name", $student_second_name),
+  array("iam", $student_iam),
+  array("class_id", $student_class_id),
+  array("tuteur_id", $student_tuteur_id),
+  array("year", $student_year),
+);
+
+$sql_student = "SELECT id, first_name, second_name, iam, class_id, tuteur_id, year FROM student WHERE id = ' . $link_value . ' AND second_name = ' . $link_value . ' AND iam = ' . $link_value . ' AND year = ' . $link_value . ';
+
+$result_student = import_arr($sql_student, $arr_student);
+
+$student_id = $result_student[0][1];
+$student_first_name = $result_student[1][1];
+$student_second_name = $result_student[2][1];
+$student_iam = $result_student[3][1];
+$student_class_id = $result_student[4][1];
+$student_tuteur_id = $result_student[5][1];
+$student_year = $result_student[6][1];

@@ -1,0 +1,23 @@
+
+// import room
+
+$room_id = array();
+$room_name = array();
+$room_entreprise = array();
+$room_year = array();
+
+$arr_room = array(
+  array("id", $room_id),
+  array("name", $room_name),
+  array("entreprise", $room_entreprise),
+  array("year", $room_year),
+);
+
+$sql_room = "SELECT id, name, entreprise, year FROM room WHERE name = ' . $link_value . ' AND year = ' . $link_value . ';
+
+$result_room = import_arr($sql_room, $arr_room);
+
+$room_id = $result_room[0][1];
+$room_name = $result_room[1][1];
+$room_entreprise = $result_room[2][1];
+$room_year = $result_room[3][1];

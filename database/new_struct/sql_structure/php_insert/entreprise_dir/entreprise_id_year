@@ -1,0 +1,23 @@
+
+// import entreprise
+
+$entreprise_id = array();
+$entreprise_name = array();
+$entreprise_CEO = array();
+$entreprise_year = array();
+
+$arr_entreprise = array(
+  array("id", $entreprise_id),
+  array("name", $entreprise_name),
+  array("CEO", $entreprise_CEO),
+  array("year", $entreprise_year),
+);
+
+$sql_entreprise = "SELECT id, name, CEO, year FROM entreprise WHERE id = ' . $link_value . ' AND year = ' . $link_value . ';
+
+$result_entreprise = import_arr($sql_entreprise, $arr_entreprise);
+
+$entreprise_id = $result_entreprise[0][1];
+$entreprise_name = $result_entreprise[1][1];
+$entreprise_CEO = $result_entreprise[2][1];
+$entreprise_year = $result_entreprise[3][1];

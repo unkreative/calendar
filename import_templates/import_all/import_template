@@ -1,0 +1,13 @@
+// import {name}
+
+{defining values}(fieldname_name)
+
+$arr_{name} = array(
+    {field name array}("array("name"), $name")
+);
+
+$sql_{name} = "SELECT {values} FROM {name}";
+
+$result_{name} = import_arr($sql_{name}, $arr_{name});
+
+{}($name = $result_{name}[index][1])

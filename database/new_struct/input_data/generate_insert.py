@@ -61,15 +61,15 @@ with open("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/inpu
         #         day[x] = day[x].split("|")
         #     print(day[x])
         
-        day[0] = day[0][1]
+        # day[0] = day[0][1]
 
-        day[1].pop(0)
-        day[1].pop(-1)
+        # day[1].pop(0)
+        # day[1].pop(-1)
         
-        day[2] = day[2][1]
+        # day[2] = day[2][1]
         
-        day[3].pop(0)
-        day[3].pop(-1)
+        # day[3].pop(0)
+        # day[3].pop(-1)
 
     for day in days:
         for item in range(0, len(day)):
@@ -94,19 +94,55 @@ with open("/Users/lousergonne/Documents/GitHub/calendar/database/new_struct/inpu
                 if "_" in day[item][-1]:
                     day[item].pop(-1)
                     day[item].append("_")
+
                 if len(day[item]) == 1:
-                    pr
-                    day[item] = day[item][1]
-
-
-        
-
-
+                    day[item] = day[item][0]
 
                 
 
     print("\n\n\n\n\n\n\n")
 
     print(lundi, "\n\n", mardi, "\n\n", mercredi, "\n\n", jeudi, "\n\n", vendredi)
-
     
+    # query
+    # INSERT INTO `student_entreprise` (`id`, `student_id`, `entreprise_id`, `plage_1`, `plage_2`, `plage_3`, `plage_4`, `plage_5`, `plage_6`, `plage_7`, `plage_8`, `year`) VALUES (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
+
+for day in days:
+    weekday = day[0]
+    rooms = day[1]
+    hour = []
+    students = []
+    for x in range(2, len(day)):
+        if (x % 2) == 0:
+            hour.append(day[x])
+        else:
+            students.append("|")
+            for item in day[x]:
+                students.append(item)
+    print()
+    
+
+    print("weekday:",weekday)
+    print("rooms:",rooms)
+    print("hour:",hour)
+    print("students:",students)
+    print()
+    section_indexes = [i for i, x in enumerate(students) if x == "|"]
+    section_indexes.append(len(students))
+
+    student_indexes = [i for i, x in enumerate(students) if x == "_"]
+
+
+    print(section_indexes)
+    print(student_indexes)
+    section = []
+
+    for section_index in range(0, len(section_indexes)-1):
+        print("section_index:",section_index, section_indexes[section_index], "section_index+1:", section_index+1, section_indexes[section_index+1])
+        print()
+        a = students[section_indexes[section_index]:section_indexes[section_index+1]]
+        
+        print(a)
+        print()
+        section.append(a)
+    print(section)

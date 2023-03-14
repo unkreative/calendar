@@ -1,0 +1,20 @@
+
+// import interval
+
+$interval_id = array();
+$interval_start = array();
+$interval_end = array();
+
+$arr_interval = array(
+  array("id", $interval_id),
+  array("start", $interval_start),
+  array("end", $interval_end),
+);
+
+$sql_interval = "SELECT id, start, end FROM interval WHERE start = ' . $link_value . ' AND end = ' . $link_value . ';
+
+$result_interval = import_arr($sql_interval, $arr_interval);
+
+$interval_id = $result_interval[0][1];
+$interval_start = $result_interval[1][1];
+$interval_end = $result_interval[2][1];
