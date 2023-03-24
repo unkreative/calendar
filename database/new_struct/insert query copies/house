@@ -1,1 +1,8 @@
-INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, NULL, NULL, NULL)
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "NULL", 0, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Ansembourg", 1, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Hollenfels", 2, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Koerich", 3, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Simmern", 4, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Schoenfels", 5, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Larochette", 6, 2);
+INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, "Mersch", 7, 2);
