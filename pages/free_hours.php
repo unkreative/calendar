@@ -272,7 +272,7 @@ $mysqli->close();
             font-size: 16px;
             "
             >
-              <a class="nav-link" href="/pages/all_students.php">students</a>
+              <a class="nav-link" href="/pages/all_students.html">students</a>
             </li>
 
 
@@ -290,7 +290,7 @@ $mysqli->close();
             display:flex;
             justify-content: center;
             font-size: 16px;">
-              <a class="nav-link" href="/pages/all_students.php">all students</a>
+              <a class="nav-link" href="/pages/all_students.html">all students</a>
             </li>
 
 
@@ -338,7 +338,7 @@ $mysqli->close();
       //  for id, write name in main_box div
       const main_box = document.getElementById("main_box")
       for (let i = 0; i < id_houses.length; i++) {
-        main_box.insertAdjacentHTML("afterbegin",`      <a href="free_hours_houses.php?house_id=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
+        main_box.insertAdjacentHTML("afterbegin",`      <a href="free_hours_houses.html?house_id=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
       }
       </script>
       <!-- classes -->

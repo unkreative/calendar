@@ -328,7 +328,7 @@ $free_hour2 = $result_classes_free_hours[3][1];
             font-size: 16px;
             "
             >
-              <a class="nav-link" href="/pages/all_students.php">students</a>
+              <a class="nav-link" href="/pages/all_students.html">students</a>
             </li>
 
 
@@ -346,7 +346,7 @@ $free_hour2 = $result_classes_free_hours[3][1];
             display:flex;
             justify-content: center;
             font-size: 16px;">
-              <a class="nav-link" href="/pages/all_students.php">all students</a>
+              <a class="nav-link" href="/pages/all_students.html">all students</a>
             </li>
 
 
