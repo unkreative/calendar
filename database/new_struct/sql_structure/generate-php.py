@@ -4164,10 +4164,10 @@ def generate():
     result = []
     struct_begin = """<?php
 
-$db_host = 'localhost';
-$db_user = 'root';
-$db_password = 'root';
-$db_db = 'schedule';
+  $db_host = 'sergonnelou.ddns.net';
+  $db_user = 'visitor';
+  $db_password = 'visitor';
+  $db_db = 'schedule';
 
 $mysqli = @new mysqli(
 $db_host,
