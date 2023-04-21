@@ -1,0 +1,27 @@
+name: scp copy folder to remote via SSH
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      LOCAL: test
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup demo
+        run: |
+          mkdir test
+          touch test/oof.txt
+          touch test/.dot.txt
+      - name: Copy folder content recursively to remote
+        uses: ./
+        with:
+          local: /
+          remote: test/
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
