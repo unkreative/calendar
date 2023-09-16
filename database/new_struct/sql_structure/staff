@@ -1,1 +1,0 @@
-INSERT INTO `staff` (`id`, `first_name`, `second_name`, `year`) VALUES (0, 1, 2, 3)

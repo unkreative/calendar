@@ -1,1 +1,0 @@
-INSERT INTO `entreprise_staff` (`id`, `staff_id`, `entreprise_id`, `post`, `year`) VALUES (0, 1, 2, 3, 4)

@@ -1,0 +1,55 @@
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.5. Set the 'ServerName' directive globally to suppress this message
+[Thu Aug 24 14:54:44.033873 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Thu Aug 24 14:54:44.034531 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Aug 24 15:01:09.078195 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Thu Aug 24 15:01:16.119365 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Thu Aug 24 15:01:16.119828 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Aug 24 16:33:53.811662 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.5. Set the 'ServerName' directive globally to suppress this message
+[Thu Aug 24 16:36:13.301619 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Thu Aug 24 16:36:13.303506 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+[Sun Aug 27 14:39:50.779081 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Sun Aug 27 14:39:50.785259 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Tue Aug 29 13:58:34.153779 2023] [php:error] [pid 20] [client 172.18.0.1:49528] script '/var/www/html/pages/settings.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 17:39:58.701103 2023] [php:error] [pid 21] [client 172.18.0.1:38466] script '/var/www/html/login-check.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 17:40:13.088000 2023] [php:error] [pid 17] [client 172.18.0.1:47384] script '/var/www/html/login-check.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 17:51:22.053368 2023] [php:error] [pid 22] [client 172.18.0.1:56170] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 18:14:38.264257 2023] [php:error] [pid 19] [client 172.18.0.1:36120] script '/var/www/html/create-user-submit.php' not found or unable to stat, referer: http://localhost/scripts/create-user.php
+[Tue Aug 29 18:14:50.763716 2023] [php:error] [pid 24] [client 172.18.0.1:36086] script '/var/www/html/create-user-submit.php' not found or unable to stat, referer: http://localhost/scripts/create-user.php
+[Tue Aug 29 18:45:18.807200 2023] [php:error] [pid 22] [client 172.18.0.1:54336] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 18:45:28.142874 2023] [php:error] [pid 20] [client 172.18.0.1:42546] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 18:49:53.804751 2023] [php:error] [pid 21] [client 172.18.0.1:39320] script '/var/www/html/overview.php' not found or unable to stat
+[Tue Aug 29 20:43:24.640302 2023] [php:error] [pid 20] [client 172.18.0.1:34512] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 20:43:32.326677 2023] [php:error] [pid 21] [client 172.18.0.1:38394] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 20:44:22.352577 2023] [php:error] [pid 19] [client 172.18.0.1:35430] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/
+[Tue Aug 29 20:45:08.931417 2023] [php:error] [pid 22] [client 172.18.0.1:38742] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/index.php
+[Tue Aug 29 20:45:19.813669 2023] [php:error] [pid 23] [client 172.18.0.1:38760] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/index.php
+[Tue Aug 29 20:45:53.012455 2023] [php:error] [pid 21] [client 172.18.0.1:47614] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/index.php
+[Tue Aug 29 20:45:55.735185 2023] [php:error] [pid 17] [client 172.18.0.1:47618] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/index.php
+[Tue Aug 29 20:45:59.727272 2023] [php:error] [pid 24] [client 172.18.0.1:47636] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/index.php
+[Tue Aug 29 20:46:19.759683 2023] [php:error] [pid 22] [client 172.18.0.1:39390] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/index.php
+[Tue Aug 29 23:40:18.201898 2023] [php:error] [pid 23] [client 172.18.0.1:43972] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/pages/settings.php
+[Tue Aug 29 23:40:34.584951 2023] [php:error] [pid 20] [client 172.18.0.1:39628] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/pages/settings.php
+[Tue Aug 29 23:40:37.012188 2023] [php:error] [pid 20] [client 172.18.0.1:39628] script '/var/www/html/pages/index.php' not found or unable to stat, referer: http://localhost/pages/settings.php
+[Tue Aug 29 23:40:46.723065 2023] [php:error] [pid 21] [client 172.18.0.1:58926] script '/var/www/html/end-session.php' not found or unable to stat, referer: http://localhost/pages/settings.php
+[Thu Aug 31 09:34:51.334113 2023] [autoindex:error] [pid 18] [client 172.18.0.1:41462] AH01276: Cannot serve directory /var/www/html/pages/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive, referer: http://localhost/pages/student.php?student=629
+[Thu Aug 31 09:35:08.710130 2023] [php:error] [pid 22] [client 172.18.0.1:53070] script '/var/www/html/pages/edit_student.php' not found or unable to stat, referer: http://localhost/pages/student.php?student=629
+[Mon Sep 04 12:24:56.600782 2023] [autoindex:error] [pid 17] [client 172.18.0.1:50882] AH01276: Cannot serve directory /var/www/html/pages/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Tue Sep 05 11:54:11.654986 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+[Tue Sep 05 11:55:38.408050 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Tue Sep 05 11:55:38.408669 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Sep 07 14:50:28.732424 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Sun Sep 10 13:50:39.401638 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Sun Sep 10 13:50:39.402462 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Fri Sep 15 08:49:13.708403 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Fri Sep 15 08:49:34.656988 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Fri Sep 15 08:49:34.659233 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sat Sep 16 22:51:15.805031 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+[Sat Sep 16 23:06:16.075334 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.38 (Debian) PHP/8.0.19 OpenSSL/1.1.1n configured -- resuming normal operations
+[Sat Sep 16 23:06:16.091237 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'

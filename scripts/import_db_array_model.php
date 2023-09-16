@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD:www/scripts/import_db_array_model.php
+require "scripts/import_db_array";
+=======
 require "../scripts/import_db_array";
+>>>>>>> 8f441ba631609df0567588f10043583fc6268dd6:scripts/import_db_array_model.php
 
 // $sql_selector = sql query
 // $keys_arrays = array(

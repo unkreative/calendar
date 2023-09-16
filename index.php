@@ -1,23 +1,39 @@
-<!DOCTYPE html>
+<?php
+require "scripts/check-login.php";
+cookie_session_index();
 
+?>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Signin</title>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
-    <title>Homepage</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-</head>
-<body>
-    <div id="navbar"></div>
-    <script src="/scripts/navbar.js"></script>
-    
-</body>
+    <!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+  <form class="form-signin" action="pages/login-check.php" method="post">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    
+                    <label for="uname" class="sr-only">Username</label>
+                    <input type="text" id="uname" name="uname" class="form-control" placeholder="Username" required autofocus>
+                    
+                    <label for="password" class="sr-only">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+  </body>
 </html>

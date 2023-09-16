@@ -1,1 +1,0 @@
-INSERT INTO `tuteur_house` (`id`, `house_id`, `tuteur_id`, `year`) VALUES (NULL, NULL, NULL, NULL)

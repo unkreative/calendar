@@ -1,113 +1,68 @@
-<!doctype html>
+<?php
+require "../scripts/check-login.php";
+cookie_session();
 
+?>
 <?php
 
-  $db_host = 'localhost';
-  $db_user = 'root';
-  $db_password = 'root';
-  $db_db = 'schedule';
- 
-  $mysqli = @new mysqli(
-    $db_host,
-    $db_user,
-    $db_password,
-    $db_db
-  );
-	
-  if ($mysqli->connect_error) {
-    echo 'Errno: '.$mysqli->connect_errno;
-    echo '<br>';
-    echo 'Error: '.$mysqli->connect_error;
-    exit();
-  }
-// houses
+require "../scripts/import_db_array.php";
 
-$sql_houses = "SELECT id, name, house_number, schoolyear FROM houses";
+// houses
+$sql_houses = "SELECT id, name FROM house";
 // echo "<Br>";
 // echo $sql_student;
-$result_houses = $mysqli->query($sql_houses);
 
-$id_houses = array();
-$name_houses = array();
-$number_houses = array();
-$schoolyear_houses = array();
+$house_keys = [
+  "id",
+  "name"
+];
 
+  $house_result = import_arr($sql_houses, $house_keys);
+  
+  $id_houses = $house_result[0];
+  $name_houses = $house_result[1];
 
-if ($result_houses->num_rows > 0) {
-  // output data of each row
-  while($row = $result_houses->fetch_assoc()) {
-    array_push($id_houses, $row["id"]);
-    array_push($name_houses, $row["name"]);
-    array_push($number_houses, $row["house_number"]);
-    array_push($schoolyear_houses, $row["schoolyear"]);
+// import class
+  $class_keys = [
+    "id",
+    "class_id",
+    "house_id"
+  ];
 
-    // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-  }
-} else {
-  echo "0 results";
-}
+  $sql_classes = "SELECT id, class_id, house_id FROM class";
 
-  // echo 'Success: A proper connection to MySQL was made.';
-  // echo '<br>';
-  // echo 'Host information: '.$mysqli->host_info;
-  // echo '<br>';
-  // echo 'Protocol version: '.$mysqli->protocol_version;
-  $id_classes = array();
-  $name_classes = array();
-  $schoolyear_classes = array();
+  $class_result = import_arr($sql_classes, $class_keys);
+
+  $id_classes = $class_result[0];
+  $name_classes = $class_result[1];
+  $house_id_classes = $class_result[2];
 
 
-  $sql_classes = "SELECT id, name, schoolyear FROM classes";
-  $result_classes = $mysqli->query($sql_classes);
+// import student
 
-  if ($result_classes->num_rows > 0) {
-    // output data of each row
-    while($row = $result_classes->fetch_assoc()) {
-      array_push($id_classes, $row["id"]);
-      array_push($name_classes, $row["name"]);
-      array_push($schoolyear_classes, $row["schoolyear"]);
+$student_keys = [
+  "id",
+  "first_name",
+  "second_name",
+  "iam",
+  "class",
+  "tuteur"
+];
 
-      // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-    }
-  } else {
-    echo "0 results";
-  }
+  $sql_student = "SELECT id, first_name, second_name, iam, class, tuteur FROM student";
 
+  $student_result = import_arr($sql_student,$student_keys);
 
-
-
-  $id_student = array();
-  $first_name_student = array();
-  $second_name_student = array();
-  $iam_student = array();
-  $schoolyear_student = array();
-
-  $sql_student = "SELECT id, first_name, second_name, iam, schoolyear FROM students";
-  $result_student = $mysqli->query($sql_student);
-
-  if ($result_student->num_rows > 0) {
-    // output data of each row
-    while($row = $result_student->fetch_assoc()) {
-      array_push($id_student, $row["id"]);
-      array_push($first_name_student, $row["first_name"]);
-      array_push($second_name_student, $row["second_name"]);
-      array_push($iam_student, $row["iam"]);
-      array_push($schoolyear_student, $row["schoolyear"]);
-
-      // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-    }
-  } else {
-    echo "0 results";
-  }
-
-
-
-
-
-
-  $mysqli->close();
+  $id_student = $student_result[0];
+  $first_name_student = $student_result[1];
+  $second_name_student = $student_result[2];
+  $iam_student = $student_result[3];
+  $class_student = $student_result[4];
+  $tuteur_student = $student_result[5];
+  
 ?>
 
+<!doctype html>
 
 <html lang="en">
   <head>
@@ -115,7 +70,7 @@ if ($result_houses->num_rows > 0) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>all students</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -180,7 +135,7 @@ p {
   background-color: #E6E6E6;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;   
   display: none; /*Hidden by default */
   color: black;
 }
@@ -194,7 +149,7 @@ p {
    /* display: block; */
 }
 .containerr {
-
+   
   overflow: hidden;
   display: flex; 
   margin-left: 0px;
@@ -207,6 +162,7 @@ p {
 .btnn {
   border: none;
   outline: none;
+  margin-top: 4px;
   padding: 6px 13px;
   /* padding-left: 4px; */
   margin-right: 5px;
@@ -255,25 +211,23 @@ p {
 
       var id_houses = <?php echo json_encode($id_houses); ?>;
       var name_houses = <?php echo json_encode($name_houses); ?>;
-      var number_houses = <?php echo json_encode($number_houses); ?>;
-      var schoolyear_houses = <?php echo json_encode($schoolyear_classes); ?>;
 
       //  for id, write name in main_box div
       const main_box = document.getElementById("main_box")
       for (let i = 0; i < id_houses.length; i++) {
-        main_box.insertAdjacentHTML("afterbegin",`      <a href="houses.php?houses_id=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
-      }
+        main_box.insertAdjacentHTML("afterbegin",`      <a href="houses.php?house=${id_houses[i]}" class="filterDiv Maisons">${name_houses[i]}`)
+      } nd46
       </script>
       <!-- classes -->
       <script>
 
       var id_classes = <?php echo json_encode($id_classes); ?>;
       var name_classes = <?php echo json_encode($name_classes); ?>;
-      var schoolyear_classes = <?php echo json_encode($schoolyear_classes); ?>;
+      var house_id_classes = <?php echo json_encode($house_id_classes); ?>;
 
       //  for id, write name in main_box div
       for (let i = 0; i < id_classes.length; i++) {
-        main_box.insertAdjacentHTML("afterbegin",`      <a href="classes.php?classes_id=${id_classes[i]}" class="filterDiv Classes">${name_classes[i]}`);
+        main_box.insertAdjacentHTML("afterbegin",`      <a href="classes.php?class=${id_classes[i]}" class="filterDiv Classes">${name_classes[i]}`);
         console.log(i);
       }
       </script>
@@ -282,8 +236,10 @@ p {
         var id_student = <?php echo json_encode($id_student); ?>;
         var first_name_student = <?php echo json_encode($first_name_student); ?>;
         var second_name_student = <?php echo json_encode($second_name_student); ?>;
-        var iam_student = <?php echo json_encode($iam_student); ?>;
-        var schoolyear_student = <?php echo json_encode($schoolyear_student); ?>;
+        var iam_student = <?php echo json_encode($iam_student); ?>;        
+        var class_student = <?php echo json_encode($class_student); ?>;
+        var tuteur_student = <?php echo json_encode($tuteur_student); ?>;
+
 
         //  for id, write name in main_box div
         for (let i = 0; i < id_student.length; i++) {

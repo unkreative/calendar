@@ -1,1 +1,0 @@
-INSERT INTO `student` (`id`, `first_name`, `second_name`, `iam`, `class_id`, `tuteur_id`, `year`) VALUES (0, 1, 2, 3, 4, 5, 6)

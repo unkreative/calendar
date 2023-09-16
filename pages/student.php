@@ -1,435 +1,174 @@
+<?php
+require "../scripts/check-login.php";
+cookie_session();
+
+?>
 <!doctype html>
 <!-- TODO expand this, with more data afterwards -->
 <?php
-   $db_host = 'localhost';
-   $db_user = 'root';
-   $db_password = 'root';
-   $db_db = 'schedule';
+require "../scripts/import_db_array.php";   
+$link_value = $_GET['student'];
+
+$notes_keys = ["id", "note"];// to continue, working on the note system
+
+$sql_note = "SELECT id, note FROM note where id = " . $link_value;
+
+$note_result = import_arr($sql_note, $notes_keys);
+
+$id_note = $note_result[0][0];
+$note = $note_result[1][0];
+
+$student_keys = [ 
+   "id",
+   "first_name",
+   "second_name",
+   "iam",
+   "class",
+   "tuteur"
+ ];
+ 
+
+$sql_student = "SELECT id, first_name, second_name, iam, class, tuteur FROM student where id = " . $link_value . "";
+
+$student_result = import_arr($sql_student,$student_keys);
+
+$id_student = $student_result[0];
+$first_name_student = $student_result[1];
+$second_name_student = $student_result[2];
+$iam_student = $student_result[3];
+$class_student = $student_result[4];
+$tuteur_student = $student_result[5];
+
+$tuteur_key = [
+   "id",
+   "first_name",
+   "second_name",
+];
+
+$sql_tuteur = "SELECT id, first_name, second_name FROM tuteur WHERE id = '" . $tuteur_student[0] . "';";
+
+$tuteur_result = import_arr($sql_tuteur, $tuteur_key);
+
+$id_tuteur = $tuteur_result[0];
+$first_name_tuteur = $tuteur_result[1];
+$second_name_tuteur = $tuteur_result[2];
+
+
+// get class
+
+$class_keys = [
+   "id",
+   "class_id",
+   "house_id",
+
+];
+
+$sql_class = "SELECT id, class_id, house_id FROM class WHERE id = " . $class_student[0] . ";";
+$class_result = import_arr($sql_class, $class_keys);
+
+
+$id_class = $class_result[0];
+$name_class = $class_result[1];
+$house_id = $class_result[2];
+
+
+// get house
+
+$house_keys = [
+   "id",
+   "name"
+];
+
+$sql_houses = "SELECT id, name FROM house where id = " . $house_id[0] . "";
+
+$result_houses = import_arr($sql_houses, $house_keys);
+
+
+$id_houses = $result_houses[0];
+$name_houses = $result_houses[1];
+
+// import timeschedule from student
+$student_entreprise_keys = [
+   "id",
+   "entreprise_1",
+   "entreprise_1_plage",
+   "entreprise_2",
+   "entreprise_2_plage",
+   "entreprise_3",
+   "entreprise_3_plage",
+   "entreprise_4",
+   "entreprise_4_plage",
+   "entreprise_5",
+   "entreprise_5_plage",
+   "entreprise_6",
+   "entreprise_6_plage",
+   "entreprise_7",
+   "entreprise_7_plage",
+   "entreprise_8",
+   "entreprise_8_plage",
    
-   $mysqli = @new mysqli(
-     $db_host,
-     $db_user,
-     $db_password,
-     $db_db
-   );
-   
-   if ($mysqli->connect_error) {
-     echo 'Errno: '.$mysqli->connect_errno;
-     echo '<br>';
-     echo 'Error: '.$mysqli->connect_error;
-     exit();
-   }
-   
-   $link_value = $_GET['student_id'];
+];
+
+$sql_student_entreprise = "SELECT * FROM entreprise_student WHERE id = " . $id_student[0] . ";";
+
+$result_student_entreprise = import_arr($sql_student_entreprise, $student_entreprise_keys);
+
+$id_student_entreprise = $result_student_entreprise[0];
+$entreprise_1 = $result_student_entreprise[1];
+$entreprise_1_plage = $result_student_entreprise[2];
+$entreprise_2 = $result_student_entreprise[3];
+$entreprise_2_plage = $result_student_entreprise[4];
+$entreprise_3 = $result_student_entreprise[5];
+$entreprise_3_plage = $result_student_entreprise[6];
+$entreprise_4 = $result_student_entreprise[7];
+$entreprise_4_plage = $result_student_entreprise[8];
+$entreprise_5 = $result_student_entreprise[9];
+$entreprise_5_plage = $result_student_entreprise[10];
+$entreprise_6 = $result_student_entreprise[11];
+$entreprise_6_plage = $result_student_entreprise[12];
+$entreprise_7 = $result_student_entreprise[13];
+$entreprise_7_plage = $result_student_entreprise[14];
+$entreprise_8 = $result_student_entreprise[15];
+$entreprise_8_plage = $result_student_entreprise[16];
+
+// get timetable data
 
 
-   // echo 'Success: A proper connection to MySQL was made.';
-   // echo '<br>';
-   // echo 'Host information: '.$mysqli->host_info;
-   // echo '<br>';
-   // echo 'Protocol version: '.$mysqli->protocol_version;
-   
-   $id = array();
-   $first_name = array();
-   $second_name = array();
-   $iam = array();
-   // timetable
-   $schoolyear = array();
-   
-   $sql = "SELECT id, first_name, second_name, iam, schoolyear FROM students where id = " . $link_value . "";
-   $result = $mysqli->query($sql);
-   
-   if ($result->num_rows > 0) {
-     // output data of each row
-     while($row = $result->fetch_assoc()) {
-       array_push($id, $row["id"]);
-       array_push($first_name, $row["first_name"]);
-       array_push($second_name, $row["second_name"]);
-       array_push($iam, $row["iam"]);
-       array_push($schoolyear, $row["schoolyear"]);
-   
-       // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-     }
-   } else {
-     echo "0 results";
-   }
+// get entreprise names
+$entreprise_keys = [
+   "id",
+   "name",
+   "ceo",
+];
+
+$sql_entreprise = "SELECT * FROM entreprise";
+$result_entreprise = import_arr($sql_entreprise, $entreprise_keys);
+
+$id_entrerprise = $result_entreprise[0];
+$name_entreprise = $result_entreprise[1];
+$ceo_entreprise = $result_entreprise[2];
 
 
-   // get the tuteur info
-   $id_tuteur_selector = array();
-   $tuteur_id = array();
-
-   
-   $sql_tuteur_selector = "SELECT id, student_id, tuteur_id, schoolyear FROM tuteur_student where student_id = " . $link_value . "";
-   $result_tuteur_selector = $mysqli->query($sql_tuteur_selector);
-   
-   if ($result_tuteur_selector->num_rows > 0) {
-      while($row = $result_tuteur_selector->fetch_assoc()) {
-         array_push($id_tuteur_selector, $row["id"]);
-         array_push($tuteur_id, $row["tuteur_id"]);
-      }
-   } else {
-     echo "01 results ";
-   }
-   
-   $id_tuteur = array();
-   $first_name_tuteur = array();
-   $second_name_tuteur = array();
-   $schoolyear = array();
-
-   $sql_tuteur = "SELECT id, first_name, second_name, house, entreprise, schoolyear FROM tuteur where id = " . $tuteur_id[0] . "";
-   $result_tuteur = $mysqli->query($sql_tuteur);
-
-   if ($result_tuteur->num_rows > 0) {
-      while($row = $result_tuteur->fetch_assoc()) {
-   
-         array_push($id_tuteur, $row["id"]);
-         array_push($first_name_tuteur, $row["first_name"]);
-         array_push($second_name_tuteur, $row["second_name"]);
-         array_push($schoolyear, $row["schoolyear"]);
-      }
-   } else {
-     echo "02 results";
-   }
-
-
-   $id_class_selector = array();
-   $class_id_selector = array();
-
-   
-   $sql_class_selector = "SELECT id, classes_id FROM students_classes where student_id = " . $link_value . "";
-   $result_class_selector = $mysqli->query($sql_class_selector);
-   
-   if ($result_class_selector->num_rows > 0) {
-      while($row = $result_class_selector->fetch_assoc()) {
-   
-         array_push($id_class_selector, $row["id"]);
-         array_push($class_id_selector, $row["classes_id"]);
-      }
-   } else {
-     echo "03 results";
-   }
-   
-   $id_class = array();
-   $name_class = array();
-   
-   $sql_class = "SELECT id, name, schoolyear FROM classes where id = " . $class_id_selector[0] . "";
-
-   $result_class = $mysqli->query($sql_class);
-
-   if ($result_class->num_rows > 0) {
-      while($row = $result_class->fetch_assoc()) {
-   
-         array_push($id_class, $row["id"]);
-         array_push($name_class, $row["name"]);
-      }
-   } else {
-     echo "04 results";
-   }
-
-// select house
-   $id_houses_selector = array();
-   $houses_id_selector = array();
-
-   
-   $sql_houses_selector = "SELECT id, classes_id, house_id FROM classes_houses where classes_id = " . $class_id_selector[0] . "";
-   $result_houses_selector = $mysqli->query($sql_houses_selector);
-   
-   if ($result_houses_selector->num_rows > 0) {
-      while($row = $result_houses_selector->fetch_assoc()) {
-   
-         array_push($id_houses_selector, $row["id"]);
-         array_push($houses_id_selector, $row["house_id"]);
-      }
-   } else {
-     echo "05 results";
-   }
-   
-   $id_houses = array();
-   $name_houses = array();
-   
-   $sql_houses = "SELECT id, name, schoolyear FROM houses where id = " . $houses_id_selector[0] . "";
-
-   $result_houses = $mysqli->query($sql_houses);
-
-   if ($result_houses->num_rows > 0) {
-      while($row = $result_houses->fetch_assoc()) {
-   
-         array_push($id_houses, $row["id"]);
-         array_push($name_houses, $row["name"]);
-      }
-   } else {
-     echo "06 results";
-   }
-
-   $id_timetable  = array();
-   $student_id = array();
-   $entreprise_id = array();
-
-   $plage_1 = array();
-   $plage_2 = array();
-   $plage_3 = array();
-   $plage_4 = array();
-   $plage_5 = array();
-   $plage_6 = array();
-   $plage_7 = array();
-   $plage_8 = array();
-
-   $schoolyear_timetable = array();
-
-
-   $sql_timetable = "SELECT id, student_id, entreprise_id, plage_1, plage_2, plage_3, plage_4, plage_5, plage_6, plage_7, plage_8, schoolyear FROM student_entreprise where student_id = " . $link_value . "";
-   $result_timetable = $mysqli->query($sql_timetable);
-
-   if ($result_timetable->num_rows > 0) {
-     // output data of each row
-     while($row = $result_timetable->fetch_assoc()) {
-       array_push($id_timetable, $row["id"]);
-       array_push($student_id, $row["student_id"]);
-       array_push($entreprise_id, $row["entreprise_id"]);
-
-       array_push($plage_1, $row["plage_1"]);
-       array_push($plage_2, $row["plage_2"]);
-       array_push($plage_3, $row["plage_3"]);
-       array_push($plage_4, $row["plage_4"]);
-       array_push($plage_5, $row["plage_5"]);
-       array_push($plage_6, $row["plage_6"]);
-       array_push($plage_7, $row["plage_7"]);
-       array_push($plage_8, $row["plage_8"]);
-
-       array_push($schoolyear_timetable, $row["schoolyear"]);
-   
-       // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-     }
-   } else {
-     echo "07 results";
-   }
-   $timetable_dates = array();
-
-   $mysqli->close();
    ?>
 <html lang="en">
+   
    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <title>Bootstrap 101 Template</title>
+      <title>students</title>
       <!-- fontawesome -->
       <script src="https://kit.fontawesome.com/8765e29cc7.js" crossorigin="anonymous"></script>
       <!-- Bootstrap -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-      <style>
-         .txt {
-         font-family: 'Inter', sans-serif;
-         /* font-style: bold; */
-         font-weight: 700;
-         font-size: 24px;
-         line-height: 150%;
-         /* or 36px */
-         display: flex;
-         align-items: center;
-         text-align: center;
-         align-items: center;
-         justify-content: center;
-         letter-spacing: -0.019em;
-         color: #000000;
-         /* scale: 0.7 0.7; */
-         }
-         .header_tile {
-         /* calendar cell */
-         width: 200px;
-         height: 70px;
-         border-radius: 6px;
-         background: #A4A3A3;
-         /* Inside auto layout */
-         flex: none;
-         /* order: 0; */
-         /* flex-grow: 0; */
-         left: 0%;
-         right: 0%;
-         top: 0%;
-         bottom: 0%;
-         }
-         .big_tile {
-         width: 200px;
-         height: 140px;
-         /* scale: 0.7 0.7; */
-         }
-         .liddle_tile {
-         width: 200px;
-         height: 70px;
-         /* scale: 0.7 0.7; */
-         }
-         .dark_tile {
-         background: #C9C9C9;
-         border-radius: 6px;
-         /* Inside auto layout */
-         flex: none;
-         flex-grow: 0;
-         }
-         .light_tile {
-         background: #E6E6E6;
-         border-radius: 6px;
-         /* Inside auto layout */
-         flex: none;
-         flex-grow: 0;
-         }
-         .calendar {
-         /* Auto layout */
-         left: 0px;
-         display: flex;
-         /* position: relative; */
-         flex-direction: column;
-         /* align-items: flex-start; */
-         padding-top: -100px;
-         gap: 10px;
-         /* width: 1250px; */
-         /* height: 690px; */
-         /* Inside auto layout */
-         /* flex: none; */
-         flex-grow: 0;
-         }
-         .big_box {
-         /* Auto layout */
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         padding-top: -100px;
-         /* gap: 49px; */
-         width: auto;
-         height: auto;
-         /* background: #525252; */
-         border-radius: 6px;
-         /* Inside auto layout */
-         /* flex: none; */
-         /* order: 0; */
-         /* flex-grow: 0; */
-         /* overflow: auto; */
-         }
-         .row {
-         /* Auto layout */
-         flex-wrap: nowrap!important;
-         display: flex;
-         flex-direction: row;
-         align-items: flex-start;
-         padding: 0px;
-         gap: 10px;
-         width: 1250px;
-         /* height: 140px; */
-         /* Inside auto layout */
-         flex: none;
-         flex-grow: 0;
-         }
-         p {
-         font-size: 17px;
-         padding-right: 5px;
-         color: black;
-         }
-         .container {
-         display: flex; 
-         margin-left: 0px;
-         margin-right: 0px;
-         /* flex-wrap: wrap; */
-         overflow: hidden;
-         }
-         .item {
-         order: 5; /* default is 0 */
-         margin: 10px;
-         }
-         .class_box {
-         font-size: 13px;
-         width: 200px;
-         height: 130px;
-         border-radius: 16px;
-         background-color: #E6E6E6;
-         }
-         .center {
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         }
-         .filterDiv {
-         float: left;
-         text-align: center;
-         order: 5; /* default is 0 */
-         margin-top: 10px;
-         margin-bottom: 10px;
-         margin-left: 0px;
-         margin-right: 20px;
-         text-decoration: none; 
-         font-size: 13px;
-         width: 200px;
-         height: 130px;
-         border-radius: 16px;
-         background-color: #E6E6E6;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         display: none; /*Hidden by default */
-         color: black;
-         }
-         .filterDiv:hover {
-         text-decoration: none; 
-         }
-         /* The "show" class is added to the filtered elements */
-         .show {
-         display: flex !important;
-         /* display: block; */
-         }
-         .containerr {
-         /* overflow: hidden; */
-         display: flex; 
-         margin-left: 0px;
-         margin-right: 0px;
-         flex-wrap: wrap;
-         overflow: hidden;
-         }
-         /* Style the buttons */
-         .btnn {
-         border: none;
-         outline: none;
-         padding: 6px 13px;
-         /* padding-left: 4px; */
-         margin-right: 5px;
-         border-radius: 8px;
-         background-color: #f1f1f1;
-         font-size: 16px;
-         cursor: pointer;
-         }
-         /* Add a light grey background on mouse-over */
-         .btnn:hover {
-         background-color: #ddd;
-         }
-         /* Add a dark background to the active button */
-         .btnn.active {
-         background-color: #666;
-         color: white;
-         }
-         .info_sheet {
-         margin-top: 10px;
-         padding: 20px; 
-         background: #525252;
-         width: auto;
-         height: auto;
-         border-radius: 10px;
-         overflow: auto;
-         }
-         .first_textfield {
-         list-style-type: none;
-         font-size: 20px;
-         padding-left: 30px; 
-         }
-         .no_link {
-            font-size: 17px;
+      <link href="/css/main.css" rel="stylesheet">
 
-            text-decoration: none;
-            color: black;
-         }
-      </style>
    <body style="margin-bottom: 50px;">
       <div id="navbar"></div>
       <script src="/scripts/navbar.js"></script>
@@ -443,9 +182,11 @@
                      </li>
                      <li id="iam_field">
                         <!-- iam: -->
+                        
                      </li>
                      <li id="class_field">
                         <!-- Class: 4C2 -->
+                        
                      </li>
                      <li id="house_field">
                         <!-- House: Larochette -->
@@ -456,17 +197,22 @@
                      <li  id="tuteur_field">
                         <!-- Tuteur: Alex Bara -->
                      </li>
+                     <li  id="note_field">
+                        <!-- Tuteur: Alex Bara -->
+                     </li>
                   </div>
                   
                   <script>
 
-                              const id = <?php echo json_encode($student_id); ?>;
-                              const first_name = <?php echo json_encode($first_name); ?>;
-                              const second_name = <?php echo json_encode($second_name); ?>;
-                              const iam = <?php echo json_encode($iam); ?>;
+                              const id = <?php echo json_encode($id_student); ?>;
+                              const first_name = <?php echo json_encode($first_name_student); ?>;
+                              const second_name = <?php echo json_encode($second_name_student); ?>;
+                              const iam = <?php echo json_encode($iam_student); ?>;
                               const house = <?php echo json_encode($name_houses); ?>;
                               const classes = <?php echo json_encode($name_class); ?>;
-// // import class
+
+                              const note = <?php echo json_encode($note); ?>;
+
                               const first_name_tuteur = <?php echo json_encode($first_name_tuteur); ?>;
                               const second_name_tuteur = <?php echo json_encode($second_name_tuteur); ?>;
 
@@ -476,25 +222,23 @@
                               const house_field = document.getElementById("house_field");
                               const units_field = document.getElementById("units_field");
                               const tuteur_field = document.getElementById("tuteur_field");
+                              const note_field = document.getElementById("note_field");
 
                               // insert links to class, house, and tuteur 
 
                               name_field.insertAdjacentHTML("afterbegin", `<p>Name: ${first_name[0]} ${second_name[0]}</p>`);
                               iam_field.insertAdjacentHTML("afterbegin", `<p>IAM: ${iam[0]}</p>`);
-                              class_field.insertAdjacentHTML("afterbegin", `<a class="no_link" href="/pages/classes.php?class_id=${<?php echo $class_id_selector[0] ?>}">Class: ${classes[0]}</p>`);
+                              class_field.insertAdjacentHTML("afterbegin", `<a class="no_link" href="/pages/classes.php?class=${<?php echo $id_class[0] ?>}">Class: ${classes[0]}</p>`);
                               house_field.insertAdjacentHTML("afterbegin", `<p>House: ${house[0]}</p>`);
+                              note_field.insertAdjacentHTML("afterbegin", `<p>Note: ${note}</p>`);
 
-                              tuteur_field.insertAdjacentHTML("afterbegin", `<p>Tuteur: ${first_name_tuteur} ${second_name_tuteur}</p>`)
+                              tuteur_field.insertAdjacentHTML("afterbegin", `<p>Tuteur: ${first_name_tuteur[0]} ${second_name_tuteur[0]}</p>`)
 
-
-
-
-                              
 
                   </script>
 
                   <!-- TODO make a timetable template, divs? or bootstrap -->
-                  <div class="big_box">
+                  <div class="big_box" style="height:750px;">
                      <div style="scale: 0.8; margin-top: -50px; width: auto; heigth: auto;">
                         <div class="calendar">
                            <div class="row" style="order: 1;">
@@ -577,63 +321,102 @@
                                  -->
                             <script>
                                 
-                              const id_timetable = <?php echo json_encode($id_timetable); ?>;
-                              const student_id = <?php echo json_encode($student_id); ?>;
-                              const entreprise_id = <?php echo json_encode($entreprise_id); ?>;
+                              const id_student_entreprise = <?php echo json_encode($id_student_entreprise); ?>;
 
-                              const plage_1 = <?php echo json_encode($plage_1); ?>;
-                              const plage_2 = <?php echo json_encode($plage_2); ?>;
-                              const plage_3 = <?php echo json_encode($plage_4); ?>;
-                              const plage_4 = <?php echo json_encode($plage_3); ?>;
-                              const plage_5 = <?php echo json_encode($plage_5); ?>;
-                              const plage_6 = <?php echo json_encode($plage_6); ?>;
-                              const plage_7 = <?php echo json_encode($plage_7); ?>;
-                              const plage_8 = <?php echo json_encode($plage_8); ?>;
+                              const plage_1_entreprise = <?php echo json_encode($entreprise_1); ?>;
+                              const plage_2_entreprise = <?php echo json_encode($entreprise_2); ?>;
+                              const plage_3_entreprise = <?php echo json_encode($entreprise_4); ?>;
+                              const plage_4_entreprise = <?php echo json_encode($entreprise_3); ?>;
+                              const plage_5_entreprise = <?php echo json_encode($entreprise_5); ?>;
+                              const plage_6_entreprise = <?php echo json_encode($entreprise_6); ?>;
+                              const plage_7_entreprise = <?php echo json_encode($entreprise_7); ?>;
+                              const plage_8_entreprise = <?php echo json_encode($entreprise_8); ?>;
+
+                              const plage_1 = <?php echo json_encode($entreprise_1_plage[0]); ?>;
+                              const plage_2 = <?php echo json_encode($entreprise_2_plage[0]); ?>;
+                              const plage_3 = <?php echo json_encode($entreprise_4_plage[0]); ?>;
+                              const plage_4 = <?php echo json_encode($entreprise_3_plage[0]); ?>;
+                              const plage_5 = <?php echo json_encode($entreprise_5_plage[0]); ?>;
+                              const plage_6 = <?php echo json_encode($entreprise_6_plage[0]); ?>;
+                              const plage_7 = <?php echo json_encode($entreprise_7_plage[0]); ?>;
+                              const plage_8 = <?php echo json_encode($entreprise_8_plage[0]); ?>;
                               
-                              const plage_1_ = plage_1[0].split("-");
-                              const plage_1_day = plage_1_[1];
-                              const plage_1_plage = plage_1_[0];
-
-
-                              const plage_2_ = plage_2[0].split("-");
-                              const plage_2_day = plage_2_[1];
-                              const plage_2_plage = plage_2_[0];
- 
-
-                              const plage_3_ = plage_3[0].split("-");
-                              const plage_3_day = plage_3_[1];
-                              const plage_3_plage = plage_3_[0];
- 
-
-                              const plage_4_ = plage_4[0].split("-");
-                              const plage_4_day = plage_4_[1];
-                              const plage_4_plage = plage_4_[0];
- 
-
-                              const plage_5_ = plage_5[0].split("-");
-                              const plage_5_day = plage_5_[1];
-                              const plage_5_plage = plage_5_[0];
- 
-
-                              const plage_6_ = plage_6[0].split("-");
-                              const plage_6_day = plage_6_[1];
-                              const plage_6_plage = plage_6_[0];
- 
-
-                              const plage_7_ = plage_7[0].split("-");
-                              const plage_7_day = plage_7_[1];
-                              const plage_7_plage = plage_7_[0];
- 
-                              const plage_8_ = plage_8[0].split("-");
-                              const plage_8_day = plage_8_[1];
-                              const plage_8_plage = plage_8_[0];
-
-                              const schoolyear = <?php echo json_encode($schoolyear_timetable); ?>;
+                              const entreprises = <?php echo json_encode($name_entreprise); ?>;
                               
-                              const timetable = <?php echo json_encode($timetable_dates); ?>;
-                              
+                              const combined = [plage_1_entreprise, plage_2_entreprise, plage_3_entreprise, plage_4_entreprise, plage_5_entreprise, plage_6_entreprise, plage_7_entreprise, plage_8_entreprise];
+
                               var units_present = 0;
 
+                              const count = {};
+
+                              for (const element of combined) {
+                              if (count[element]) {
+                                 count[element] += 1;
+                              } else {
+                                 count[element] = 1;
+                              }
+                              }
+                              // console.log(Object.keys(count).length);
+                              // console.log(count);
+
+
+                              var text_display = "Entreprise(s): ";
+                              var index = 0;
+
+                              for (var prop in count) {
+
+                                 let cache_entreprise = Object.values(prop)[0];
+                                 
+                                 let cache_plages = Object.values(count);
+                                 
+                                 if (index == 1) {
+                                    text_display = text_display + ", ";
+                                 }
+                                 text_display = text_display + `${entreprises[cache_entreprise-1]} (${cache_plages[index]})`;
+
+                                 index = index + 1; 
+                              }
+                              console.log(text_display);
+                              units_field.insertAdjacentHTML("afterbegin", `<p>${text_display}</p>`);
+                              
+
+                              const dict = {
+                                 1: "1-1",
+                                 2: "2-1",
+                                 3: "3-1",
+                                 4: "4-1",
+                                 5: "5-1",
+                                 6: "6-1",
+                                 7: "7-1",
+                                 8: "1-2",
+                                 9: "2-2",
+                                 10: "3-2",
+                                 11: "4-2",
+                                 12: "5-2",
+                                 13: "6-2",
+                                 14: "7-2",
+                                 15: "1-3",
+                                 16: "2-3",
+                                 17: "3-3",
+                                 18: "4-3",
+                                 19: "5-3",
+                                 20: "6-3",
+                                 21: "7-3",
+                                 22: "1-4",
+                                 23: "2-4",
+                                 24: "3-4",
+                                 25: "4-4",
+                                 26: "5-4",
+                                 27: "6-4",
+                                 28: "7-4",
+                                 29: "1-5",
+                                 30: "2-5",
+                                 31: "3-5",
+                                 32: "4-5",
+                                 33: "5-5",
+                                 34: "6-5",
+                                 35: "7-5",
+                                 };
                               // console.log(plage_1);
                               // console.log(plage_2);
                               // console.log(plage_3);
@@ -644,85 +427,38 @@
                               // console.log(plage_8);
 
                               var plage_arr = [plage_1, plage_2, plage_3, plage_4, plage_5, plage_6, plage_7, plage_8];
-                              var plage_arr_day = [plage_1_day, plage_2_day, plage_3_day, plage_4_day, plage_5_day, plage_6_day, plage_7_day, plage_8_day];
-                              var plage_arr_plage = [plage_1_plage, plage_2_plage, plage_3_plage, plage_4_plage, plage_5_plage, plage_6_plage, plage_7_plage, plage_8_day];
-                              // console.log(plage_arr);
-
+                             
+                              
                               var index = 0;
-                              for (const element of plage_arr) {
-                                 
-                                 let day = plage_arr_day[index];
-                                 let plage = plage_arr_plage[index];
+                              for (var element of plage_arr) {
+                                 let current_entreprise = combined[index];
+                                 console.log(dict[element]);
 
-                                 // console.log("plage ",plage);
-                                 // console.log("day ", day);
-                                 // console.log("day_arr ", plage_arr_day);
+                                 var cell = document.getElementById(`sched-${dict[element]}`);
+                                 cell.insertAdjacentHTML("afterbegin", `<b style=" font-family: sans-serif; font-weigth: normal;">${entreprises[current_entreprise-1]}</b>`);
 
 
-                                 // current fix for test data 
-                                 if (day > 5){
-                                    day = day-5;
-                                 };     
-
-                                 if (plage > 7){
-                                    plage = plage-5;
-                                    console.log(plage);
-                                 };           
-                                 
-                                 if (plage == 1){
-                                    console.log("skip");
-                                    console.log(plage);
-                                    
-                                 }
-                                 else if (plage == 0){
-                                    console.log("skip");
-                                    console.log(plage);
-                                 }
-                                 else if (day == 0){
-                                    console.log("skip");
-                                    console.log(plage);
-                                 }
-                                 else if (plage == 7 && day == 1){
-                                    console.log("skip");
-                                    console.log(plage);
-                                 }
-                                 else if (plage == 6 && day == 1){
-                                    console.log("skip");
-                                    console.log(plage);
-                                 }
-                                 else {
-                                 console.log("else");
-                                 
-                                 units_present ++;
-                                 
-                                 var cell = document.getElementById(`sched-${plage}-${day}`);
-                                 // console.log(`sched-${day}-${plage}`)
-                                 // console.log(cell)
-
-                                 // let cell = document.getelementbyid(`sched-${day}-${plage}`);
-
-                                 cell.insertAdjacentHTML("afterbegin", `<i class="fa-solid fa-check" style="scale: 2; color: #39FF14;"></i>`);
-                                 console.log(element, index);
-                              };
                               index ++;
                            
                            };
-                           let units_status = "ok"
-                           if (units_present < 8) {
-                              units_status = "not ok";
-                           };
-                           units_field.insertAdjacentHTML("afterbegin", `<p>Units: ${units_present} = ${units_status}</p>`);
 
-                  </script>
 
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+                           </script>
+
+</div>
+</div>
+</div>
+<div id="edit_button" style="">
+   <a href="/pages/edit_student.php?student=<?php echo $_GET["student"]?>" class="btn btn-lg btn-primary btn-block" style="font-size: 15px; margin-left: 25px; width: 13%;" class="button">Edit</a>
+</div>
+
+</div>
+</div>
+</div>
+</div> 
+
+
       
-        </div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->

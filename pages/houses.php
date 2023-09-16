@@ -1,92 +1,43 @@
 <?php
+require "../scripts/check-login.php";
+cookie_session();
 
-$db_host = 'localhost';
-$db_user = 'root';
-$db_password = 'root';
-$db_db = 'schedule';
+?>
+<?php
+require "../scripts/import_db_array.php";   
 
-$mysqli = @new mysqli(
-  $db_host,
-  $db_user,
-  $db_password,
-  $db_db
-);
-
-if ($mysqli->connect_error) {
-  echo 'Errno: '.$mysqli->connect_errno;
-  echo '<br>';
-  echo 'Error: '.$mysqli->connect_error;
-  exit();
-}
-
-// echo 'Success: A proper connection to MySQL was made.';
-// echo '<br>';
-// echo 'Host information: '.$mysqli->host_info;
-// echo '<br>';
-// echo 'Protocol version: '.$mysqli->protocol_version;
-
-$link_value = $_GET['houses_id'];
-// echo $link_value;
-
-
-$id = array();
-$class_id = array();
-$house_id = array();
-
-
-$sql_selector = "SELECT id, house_id, classes_id FROM classes_houses WHERE house_id = " . $link_value . "";
-
-$result_selector = $mysqli->query($sql_selector);
-
-// echo $result_selector;
-if ($result_selector->num_rows > 0) {
-  // output data of each row
-  while($row = $result_selector->fetch_assoc()) {
-    array_push($id, $row["id"]);
-    array_push($house_id, $row["house_id"]);
-    array_push($class_id, $row["classes_id"]);
-
-    // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-  }
-} else {
-  echo "0 results";
-}
-
-$house_id_txt = "";
-
-foreach ($house_id as $key => $value) {
-
-  $house_id_txt = $house_id_txt . " " .  $value . ",";
-  # code...
-}
-// echo "<Br>";
-$house_id_txt = substr_replace($house_id_txt, "", -1);
-
-// echo $student_id_txt;
-$sql_classes = "SELECT id, name, schoolyear FROM classes WHERE id IN (" . $house_id_txt . ")";
+$link_value = $_GET["house"];
+// houses
+$sql_houses = "SELECT id, name FROM house WHERE id = " . $link_value;
 // echo "<Br>";
 // echo $sql_student;
-$result_classes = $mysqli->query($sql_classes);
 
-$id_classes = array();
-$name_classes = array();
-$schoolyear_classes = array();
+$house_keys = [
+    "id",
+    "name"
+    ];
+
+  $house_result = import_arr($sql_houses, $house_keys);
+  
+  $id_houses = $house_result[0];
+  $name_houses = $house_result[1];
+
+// import class
+  $class_keys = [
+    "id",
+    "class_id",
+    "house_id"
+  ];
+
+  $sql_classes = "SELECT id, class_id, house_id FROM class WHERE house_id = " . $id_houses[0] . ";";
+
+  $class_result = import_arr($sql_classes, $class_keys);
+
+  $id_classes = $class_result[0];
+  $name_classes = $class_result[1];
+  $house_id_classes = $class_result[2];
 
 
-if ($result_classes->num_rows > 0) {
-  // output data of each row
-  while($row = $result_classes->fetch_assoc()) {
-    array_push($id_classes, $row["id"]);
-    array_push($name_classes, $row["name"]);
-    array_push($schoolyear_classes, $row["schoolyear"]);
-
-    // echo "id: " . $row["id"]. " - First Name: " . $row["first_name"]. "- Last name" . $row["second_name"]. "- iam" . $row["iam"]. "- schoolyear". $row["schoolyear"]. "<br>";
-  }
-} else {
-  echo "0 results";
-}
-// echo $first_name_student[0];
-$mysqli->close();
 
 
 ?>
@@ -97,7 +48,7 @@ $mysqli->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>houses</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -214,12 +165,12 @@ p {
 
 var id_classes = <?php echo json_encode($id_classes); ?>;
 var name_classes = <?php echo json_encode($name_classes); ?>;
-var schoolyear = <?php echo json_encode($schoolyear_classes); ?>;
+var house_id = <?php echo json_encode($house_id_classes); ?>;
 
 //  for id, write name in main_box div
 const main_box = document.getElementById("main_box")
 for (let i = 0; i < id_classes.length; i++) {
-  main_box.insertAdjacentHTML("afterbegin",`      <a class="filterDiv" href="classes.php?classes_id=${id_classes[i]}">${name_classes[i]}</a>`);
+  main_box.insertAdjacentHTML("afterbegin",`      <a class="filterDiv" href="classes.php?class=${id_classes[i]}">${name_classes[i]}</a>`);
 }
 
 </script>

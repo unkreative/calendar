@@ -1,1 +1,0 @@
-INSERT INTO `student_entreprise` (`id`, `student_id`, `entreprise_id`, `plage_1`, `plage_2`, `plage_3`, `plage_4`, `plage_5`, `plage_6`, `plage_7`, `plage_8`, `year`) VALUES (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)

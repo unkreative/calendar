@@ -1,1 +1,0 @@
-INSERT INTO `house` (`id`, `name`, `house_number`, `year`) VALUES (NULL, NULL, NULL, NULL)

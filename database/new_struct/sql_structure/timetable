@@ -1,1 +1,0 @@
-INSERT INTO `timetable` (`id`, `interval`, `day`, `year`) VALUES (0, 1, 2, 3)
