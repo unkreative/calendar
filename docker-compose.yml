@@ -34,6 +34,7 @@ services:
       context: "./bin/${DATABASE}"
     container_name: "${COMPOSE_PROJECT_NAME}-${DATABASE}"
     restart: "always"
+    command: --lower_case_table_names=0
     ports:
       - "127.0.0.1:${HOST_MACHINE_MYSQL_PORT}:3306"
     volumes:
@@ -45,6 +46,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
   phpmyadmin:
     image: phpmyadmin
     container_name: "${COMPOSE_PROJECT_NAME}-phpmyadmin"

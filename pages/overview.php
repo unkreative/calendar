@@ -193,6 +193,8 @@ $ceo_entreprise = $result_entreprise[2];
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+body {overflow:scroll;}
+
 a {
   color: black !important;
   text-decoration: none; /* no underline */
@@ -704,7 +706,7 @@ var student_dict = [];
 <div id="navbar"></div>
 <script src="/scripts/navbar.js"></script>
 
-<div class="container3" style="overflow: hidden;">
+<div class="container3" style="overflow: scroll;">
     <!-- <div id="filters"> -->
     <!-- <div id="body" class="w100 container2"> -->
     <!-- <div id="body"> -->
@@ -761,7 +763,7 @@ var student_dict = [];
                               <div style="padding-top: 17px;" class="header_tile txt">Mardi</div>
                               <div style="padding-top: 17px;" class="header_tile txt">Mercredi</div>
                               <div style="padding-top: 17px;" class="header_tile txt">Jeudi</div>
-                              <div style="padding-top: 17px;" class="header_tile txt">Mardi</div>
+                              <div style="padding-top: 17px;" class="header_tile txt">Vendredi</div>
                            </div>
 
                            <div class="row" style="order: 2;">
@@ -935,7 +937,7 @@ function clearBox(elementID){
                               <div style="padding-top: 17px;" class="header_tile txt">Mardi</div>
                               <div style="padding-top: 17px;" class="header_tile txt">Mercredi</div>
                               <div style="padding-top: 17px;" class="header_tile txt">Jeudi</div>
-                              <div style="padding-top: 17px;" class="header_tile txt">Mardi</div>
+                              <div style="padding-top: 17px;" class="header_tile txt">Vendredi</div>
                            </div>
 
                            <div class="row" style="order: 2;">

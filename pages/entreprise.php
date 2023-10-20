@@ -51,7 +51,7 @@ $student_entreprise_keys = [
    "entreprise_8_plage",
    
 ];
-
+$entreprise_id = $id_entrerprise_one[0];
 $sql_student_entreprise = "SELECT * FROM entreprise_student WHERE entreprise_1 = " . $entreprise_id . " OR entreprise_2 = " . $entreprise_id . " OR entreprise_3 = " . $entreprise_id . " OR entreprise_4 = " . $entreprise_id . " OR entreprise_5 = " . $entreprise_id . " OR entreprise_6 = " . $entreprise_id . " OR entreprise_7 = " . $entreprise_id . " OR entreprise_8 = " . $entreprise_id . ";";
 // echo $sql_student_entreprise;
 $result_student_entreprise = import_arr($sql_student_entreprise, $student_entreprise_keys);
@@ -512,7 +512,7 @@ var student_dict = [];
                               <div style="padding-top: 7px;" class="header_tile txt">Mardi</div>
                               <div style="padding-top: 7px;" class="header_tile txt">Mercredi</div>
                               <div style="padding-top: 7px;" class="header_tile txt">Jeudi</div>
-                              <div style="padding-top: 7px;" class="header_tile txt">Mardi</div>
+                              <div style="padding-top: 7px;" class="header_tile txt">Vendredi</div>
                            </div>
 
                            <div class="row" style="order: 2;">
@@ -599,11 +599,11 @@ const select =  document.getElementById("selector");
 
 function change_entreprise() {
     console.log(select.value);
-    window.location.assign(`http://localhost/pages/entreprise.php?entreprise=${select.value}`);
+    window.location.assign(`http://sergonnelou.ddns.net:85/pages/entreprise.php?entreprise=${select.value}`);
 };
 
 
-const entreprise_input = <?php echo $_GET["entreprise"];?>-1;
+const entreprise_input = <?php echo $_GET["entreprise"];?>;
 function display_output() {
     
     student_dict.forEach(student => {
