@@ -63,7 +63,7 @@
     ];
 
     $sched_0_0_hidden = [substr($_POST["sched-0-0-hidden"],2), "0-0"];
-    echo $sched_0_0_hidden;
+    print_r($sched_0_0_hidden);
     $sched_1_1_hidden = [substr($_POST["sched-1-1-hidden"],2), "1-1"];
     $sched_1_2_hidden = [substr($_POST["sched-1-2-hidden"],2), "1-2"];
     $sched_1_3_hidden = [substr($_POST["sched-1-3-hidden"],2), "1-3"];
