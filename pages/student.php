@@ -72,6 +72,21 @@ $name_class = $class_result[1];
 $house_id = $class_result[2];
 
 
+$salle_name_keys = [
+   "id",
+   "name",
+   "entreprise",
+
+];
+
+$sql_salle_name = "SELECT id, name, entreprise FROM salle;";
+$salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
+
+
+$id_salle_name = $salle_name_result[0];
+$name_salle_name = $salle_name_result[1];
+$entreprise_salle = $salle_name_result[2];
+
 // get house
 
 $house_keys = [
@@ -131,7 +146,31 @@ $entreprise_7_plage = $result_student_entreprise[14];
 $entreprise_8 = $result_student_entreprise[15];
 $entreprise_8_plage = $result_student_entreprise[16];
 
-// get timetable data
+$student_salle_keys = [
+   "id",
+   "salle_1",
+   "salle_2",
+   "salle_3",
+   "salle_4",
+   "salle_5",
+   "salle_6",
+   "salle_7",
+   "salle_8",
+   
+];
+
+$sql_student_salle = "SELECT * FROM entreprise_student WHERE id = " . $id_student[0] . ";";
+
+$result_student_salle = import_arr($sql_student_salle, $student_salle_keys);
+
+$salle_1 = $result_student_salle[0];
+$salle_2 = $result_student_salle[1];
+$salle_3 = $result_student_salle[2];
+$salle_4 = $result_student_salle[3];
+$salle_5 = $result_student_salle[4];
+$salle_6 = $result_student_salle[5];
+$salle_7 = $result_student_salle[6];
+$salle_8 = $result_student_salle[7];
 
 
 // get entreprise names
@@ -404,6 +443,11 @@ $ceo_entreprise = $result_entreprise[2];
                      <li id="house_field">
                         <!-- House: Larochette -->
                      </li>
+                     <li id="salle_fields">
+                        <!-- Salles: 1:  -->
+
+                     
+     
                      <li id="units_field">
                         <!-- Units: 4, chelsea; 4 lite = OK -->
                      </li>
@@ -553,6 +597,15 @@ $ceo_entreprise = $result_entreprise[2];
                               const plage_6 = <?php echo json_encode($entreprise_6_plage[0]); ?>;
                               const plage_7 = <?php echo json_encode($entreprise_7_plage[0]); ?>;
                               const plage_8 = <?php echo json_encode($entreprise_8_plage[0]); ?>;
+
+                              const salle_1 = <?php echo json_encode($salle_1[0]); ?>;
+                              const salle_2 = <?php echo json_encode($salle_2[0]); ?>;
+                              const salle_3 = <?php echo json_encode($salle_4[0]); ?>;
+                              const salle_4 = <?php echo json_encode($salle_3[0]); ?>;
+                              const salle_5 = <?php echo json_encode($salle_5[0]); ?>;
+                              const salle_6 = <?php echo json_encode($salle_6[0]); ?>;
+                              const salle_7 = <?php echo json_encode($salle_7[0]); ?>;
+                              const salle_8 = <?php echo json_encode($salle_8[0]); ?>;
                               
                               const entreprises = <?php echo json_encode($name_entreprise); ?>;
                               
@@ -654,6 +707,23 @@ $ceo_entreprise = $result_entreprise[2];
                               index ++;
                            
                            };
+
+                           const id_salle = <?php echo json_encode($id_salle_name); ?>;
+                           const name_salle = <?php echo json_encode($name_salle_name); ?>;
+                           const entreprise_salle = <?php echo json_encode($entreprise_salle); ?>;
+                           
+                           let insert_salle = `<table border="1"><tr>
+                                 <td id="salle_1">${name_salle[id_salle[salle_1]]}</td>
+                                 <td id="salle_2">${name_salle[id_salle[salle_2]]}</td>
+                                 <td id="salle_3">${name_salle[id_salle[salle_3]]}</td>
+                                 <td id="salle_4">${name_salle[id_salle[salle_4]]}</td>
+                                 <td id="salle_5">${name_salle[id_salle[salle_5]]}</td>
+                                 <td id="salle_6">${name_salle[id_salle[salle_6]]}</td>
+                                 <td id="salle_7">${name_salle[id_salle[salle_7]]}</td>
+                                 <td id="salle_8">${name_salle[id_salle[salle_8]]}</td>
+                           </tr></table></li>`
+                           let insertobj_salle = document.getElementById("salle_fields")
+                           insertobj_salle.insertAdjacentHTML("afterbegin", insert_salle);
 
 
                            </script>
