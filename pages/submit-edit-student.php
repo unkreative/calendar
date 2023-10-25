@@ -108,8 +108,8 @@ $entreprise_insert = [];
 foreach ($combined as $sched) {
     // print_r($sched);
     if (!empty($sched[0])) {
-        // echo "<br>";
-        // echo $sched[0];
+        echo "<br>";
+        echo $sched[0];
 
         $entreprise_id = $entreprises[$sched[0]];
         $entreprise_plage = $dict[$sched[1]];
