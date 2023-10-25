@@ -125,6 +125,7 @@ if (count($entreprise_insert) > 8) {
 
 };
 
+print_r($entreprise_insert);
 
 $sql_student_entreprise = "UPDATE entreprise_student SET entreprise_1_plage = ". $entreprise_insert[0][1]. ", entreprise_2_plage = ". $entreprise_insert[1][1]. ", entreprise_3_plage = ". $entreprise_insert[2][1]. ", entreprise_4_plage = ". $entreprise_insert[3][1]. ", entreprise_5_plage = ". $entreprise_insert[4][1]. ", entreprise_6_plage = ". $entreprise_insert[5][1]. ", entreprise_7_plage = ". $entreprise_insert[6][1]. ", entreprise_8_plage = ". $entreprise_insert[7][1]. ", entreprise_1 = " .$entreprise_insert[0][0]. ", entreprise_2 = " .$entreprise_insert[1][0]. ", entreprise_3 = " .$entreprise_insert[2][0]. ", entreprise_4 = " .$entreprise_insert[3][0]. ", entreprise_5 = " .$entreprise_insert[4][0]. ", entreprise_6 = " .$entreprise_insert[5][0]. ", entreprise_7 = " .$entreprise_insert[6][0]. ", entreprise_8 = " .$entreprise_insert[7][0]. " WHERE id = " . $_POST["student_id"]. ";";
 
