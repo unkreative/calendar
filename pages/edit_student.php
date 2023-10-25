@@ -1023,6 +1023,7 @@ cookie_session();
 <script>
                     
                         
+                            let sched_0_0_hidden = document.getElementById("sched-0-0-hidden");
                             let sched_1_1_hidden = document.getElementById("sched-1-1-hidden");
                             let sched_1_2_hidden = document.getElementById("sched-1-2-hidden");
                             let sched_1_3_hidden = document.getElementById("sched-1-3-hidden");
@@ -1061,6 +1062,7 @@ cookie_session();
                             
                             let combined_hidden = [sched_1_1_hidden, sched_1_2_hidden, sched_1_3_hidden, sched_1_4_hidden, sched_1_5_hidden, sched_2_1_hidden, sched_2_2_hidden, sched_2_3_hidden, sched_2_4_hidden, sched_2_5_hidden, sched_3_1_hidden, sched_3_2_hidden, sched_3_3_hidden, sched_3_4_hidden, sched_3_5_hidden, sched_4_1_hidden, sched_4_2_hidden, sched_4_3_hidden, sched_4_4_hidden, sched_4_5_hidden, sched_5_1_hidden, sched_5_2_hidden, sched_5_3_hidden, sched_5_4_hidden, sched_5_5_hidden, sched_6_1_hidden, sched_6_2_hidden, sched_6_3_hidden, sched_6_4_hidden, sched_6_5_hidden, sched_7_1_hidden, sched_7_2_hidden, sched_7_3_hidden, sched_7_4_hidden, sched_7_5_hidden];
                             
+                            let sched_0_0 = document.getElementById("sched-0-0");
                             let sched_1_1 = document.getElementById("sched-1-1");
                             let sched_1_2 = document.getElementById("sched-1-2");
                             let sched_1_3 = document.getElementById("sched-1-3");
@@ -1097,7 +1099,7 @@ cookie_session();
                             let sched_7_4 = document.getElementById("sched-7-4");
                             let sched_7_5 = document.getElementById("sched-7-5");
                             
-                            let combined_normal = [sched_1_1, sched_1_2, sched_1_3, sched_1_4, sched_1_5, sched_2_1, sched_2_2, sched_2_3, sched_2_4, sched_2_5, sched_3_1, sched_3_2, sched_3_3, sched_3_4, sched_3_5, sched_4_1, sched_4_2, sched_4_3, sched_4_4, sched_4_5, sched_5_1, sched_5_2, sched_5_3, sched_5_4, sched_5_5, sched_6_1, sched_6_2, sched_6_3, sched_6_4, sched_6_5, sched_7_1, sched_7_2, sched_7_3, sched_7_4, sched_7_5];
+                            let combined_normal = [sched_0_0, sched_1_1, sched_1_2, sched_1_3, sched_1_4, sched_1_5, sched_2_1, sched_2_2, sched_2_3, sched_2_4, sched_2_5, sched_3_1, sched_3_2, sched_3_3, sched_3_4, sched_3_5, sched_4_1, sched_4_2, sched_4_3, sched_4_4, sched_4_5, sched_5_1, sched_5_2, sched_5_3, sched_5_4, sched_5_5, sched_6_1, sched_6_2, sched_6_3, sched_6_4, sched_6_5, sched_7_1, sched_7_2, sched_7_3, sched_7_4, sched_7_5];
                             
                             let index_hidden = 0;
                             
