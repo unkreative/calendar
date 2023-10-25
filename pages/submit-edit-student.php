@@ -20,6 +20,7 @@
     // echo '</pre>';
 
     $dict = [
+        '0-0'=> '0',
         "1-1" => 1,
         "2-1" => 2,
         "3-1" => 3,
@@ -61,6 +62,7 @@
         "Académie Beauté"=>1, "Arts & Metiers"=>2, "Atelier des Gourmets"=>3, "BAM"=>4, "C.A.D.E"=>5, "Chelsea"=>6, "Circles"=>7, "LEM.SCIENCE"=>8, "Dragons"=>9, "Lemur"=>10, "LITE"=>11, "Natter"=>12, "Sätzwierk"=>13, "Seefood"=>14, "Growlight Company"=>15, "Waves"=>16
     ];
 
+    $sched_0_0_hidden = [substr($_POST["sched-0-0-hidden"],2), "0-0"];
     $sched_1_1_hidden = [substr($_POST["sched-1-1-hidden"],2), "1-1"];
     $sched_1_2_hidden = [substr($_POST["sched-1-2-hidden"],2), "1-2"];
     $sched_1_3_hidden = [substr($_POST["sched-1-3-hidden"],2), "1-3"];
@@ -97,7 +99,7 @@
     $sched_7_4_hidden = [substr($_POST["sched-7-4-hidden"],2), "7-4"];
     $sched_7_5_hidden = [substr($_POST["sched-7-5-hidden"],2), "7-5"];
 
-    $combined = [$sched_1_1_hidden, $sched_1_2_hidden, $sched_1_3_hidden, $sched_1_4_hidden, $sched_1_5_hidden, $sched_2_1_hidden, $sched_2_2_hidden, $sched_2_3_hidden, $sched_2_4_hidden, $sched_2_5_hidden, $sched_3_1_hidden, $sched_3_2_hidden, $sched_3_3_hidden, $sched_3_4_hidden, $sched_3_5_hidden, $sched_4_1_hidden, $sched_4_2_hidden, $sched_4_3_hidden, $sched_4_4_hidden, $sched_4_5_hidden, $sched_5_1_hidden, $sched_5_2_hidden, $sched_5_3_hidden, $sched_5_4_hidden, $sched_5_5_hidden, $sched_6_1_hidden, $sched_6_2_hidden, $sched_6_3_hidden, $sched_6_4_hidden, $sched_6_5_hidden, $sched_7_1_hidden, $sched_7_2_hidden, $sched_7_3_hidden, $sched_7_4_hidden, $sched_7_5_hidden];
+    $combined = [$sched_0_0_hidden, $sched_1_1_hidden, $sched_1_2_hidden, $sched_1_3_hidden, $sched_1_4_hidden, $sched_1_5_hidden, $sched_2_1_hidden, $sched_2_2_hidden, $sched_2_3_hidden, $sched_2_4_hidden, $sched_2_5_hidden, $sched_3_1_hidden, $sched_3_2_hidden, $sched_3_3_hidden, $sched_3_4_hidden, $sched_3_5_hidden, $sched_4_1_hidden, $sched_4_2_hidden, $sched_4_3_hidden, $sched_4_4_hidden, $sched_4_5_hidden, $sched_5_1_hidden, $sched_5_2_hidden, $sched_5_3_hidden, $sched_5_4_hidden, $sched_5_5_hidden, $sched_6_1_hidden, $sched_6_2_hidden, $sched_6_3_hidden, $sched_6_4_hidden, $sched_6_5_hidden, $sched_7_1_hidden, $sched_7_2_hidden, $sched_7_3_hidden, $sched_7_4_hidden, $sched_7_5_hidden];
 
 // INSERT INTO `entreprise_student` (`id`, `entreprise_1`, `entreprise_1_plage`, `entreprise_2`, `entreprise_2_plage`, `entreprise_3`, `entreprise_3_plage`, `entreprise_4`, `entreprise_4_plage`, `entreprise_5`, `entreprise_5_plage`, `entreprise_6`, `entreprise_6_plage`, `entreprise_7`, `entreprise_7_plage`, `entreprise_8`, `entreprise_8_plage`) VALUES ('', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 
