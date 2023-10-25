@@ -163,14 +163,14 @@ $sql_student_salle = "SELECT * FROM entreprise_student WHERE id = " . $id_studen
 
 $result_student_salle = import_arr($sql_student_salle, $student_salle_keys);
 
-$salle_1 = $result_student_salle[0];
-$salle_2 = $result_student_salle[1];
-$salle_3 = $result_student_salle[2];
-$salle_4 = $result_student_salle[3];
-$salle_5 = $result_student_salle[4];
-$salle_6 = $result_student_salle[5];
-$salle_7 = $result_student_salle[6];
-$salle_8 = $result_student_salle[7];
+$salle_1 = $result_student_salle[1];
+$salle_2 = $result_student_salle[2];
+$salle_3 = $result_student_salle[3];
+$salle_4 = $result_student_salle[4];
+$salle_5 = $result_student_salle[5];
+$salle_6 = $result_student_salle[6];
+$salle_7 = $result_student_salle[7];
+$salle_8 = $result_student_salle[8];
 
 
 // get entreprise names
@@ -712,15 +712,15 @@ $ceo_entreprise = $result_entreprise[2];
                            const name_salle = <?php echo json_encode($name_salle_name); ?>;
                            const entreprise_salle = <?php echo json_encode($entreprise_salle); ?>;
                            
-                           let insert_salle = `</p>Salle: </p> <table border="1" style=" width: 100%;"><tr>
-                                 <td id="salle_1">${name_salle[id_salle[salle_1]]}</td>
-                                 <td id="salle_2">${name_salle[id_salle[salle_2]]}</td>
-                                 <td id="salle_3">${name_salle[id_salle[salle_3]]}</td>
-                                 <td id="salle_4">${name_salle[id_salle[salle_4]]}</td>
-                                 <td id="salle_5">${name_salle[id_salle[salle_5]]}</td>
-                                 <td id="salle_6">${name_salle[id_salle[salle_6]]}</td>
-                                 <td id="salle_7">${name_salle[id_salle[salle_7]]}</td>
-                                 <td id="salle_8">${name_salle[id_salle[salle_8]]}</td>
+                           let insert_salle = `</p>Salle: </p> <tablestyle=" width: 100%;"><tr>
+                                 <td id="salle_1">1: ${name_salle[id_salle[salle_1]]}</td>
+                                 <td id="salle_2">2: ${name_salle[id_salle[salle_2]]}</td>
+                                 <td id="salle_3">3: ${name_salle[id_salle[salle_3]]}</td>
+                                 <td id="salle_4">4: ${name_salle[id_salle[salle_4]]}</td>
+                                 <td id="salle_5">5: ${name_salle[id_salle[salle_5]]}</td>
+                                 <td id="salle_6">6: ${name_salle[id_salle[salle_6]]}</td>
+                                 <td id="salle_7">7: ${name_salle[id_salle[salle_7]]}</td>
+                                 <td id="salle_8">8: ${name_salle[id_salle[salle_8]]}</td>
                            </tr></table></li>`
                            let insertobj_salle = document.getElementById("salle_fields")
                            insertobj_salle.insertAdjacentHTML("afterbegin", insert_salle);
