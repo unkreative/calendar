@@ -712,7 +712,7 @@ $ceo_entreprise = $result_entreprise[2];
                            const name_salle = <?php echo json_encode($name_salle_name); ?>;
                            const entreprise_salle = <?php echo json_encode($entreprise_salle); ?>;
                            
-                           let insert_salle = `<table border="1"><tr>
+                           let insert_salle = `</p>Salle: </p> <table border="1" style=" width: 100%;"><tr>
                                  <td id="salle_1">${name_salle[id_salle[salle_1]]}</td>
                                  <td id="salle_2">${name_salle[id_salle[salle_2]]}</td>
                                  <td id="salle_3">${name_salle[id_salle[salle_3]]}</td>
