@@ -72,21 +72,6 @@ $name_class = $class_result[1];
 $house_id = $class_result[2];
 
 
-$salle_name_keys = [
-   "id",
-   "name",
-   "entreprise",
-
-];
-
-$sql_salle_name = "SELECT id, name, entreprise FROM salle;";
-$salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
-
-
-$id_salle_name = $salle_name_result[0];
-$name_salle_name = $salle_name_result[1];
-$entreprise_salle = $salle_name_result[2];
-
 // get house
 
 $house_keys = [
@@ -145,6 +130,22 @@ $entreprise_7 = $result_student_entreprise[13];
 $entreprise_7_plage = $result_student_entreprise[14];
 $entreprise_8 = $result_student_entreprise[15];
 $entreprise_8_plage = $result_student_entreprise[16];
+
+
+$salle_name_keys = [
+   "id",
+   "name",
+   "entreprise",
+
+];
+
+$sql_salle_name = "SELECT id, name, entreprise FROM salle;";
+$salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
+
+
+$id_salle_name = $salle_name_result[0];
+$name_salle_name = $salle_name_result[1];
+$entreprise_salle = $salle_name_result[2];
 
 $student_salle_keys = [
    "id",

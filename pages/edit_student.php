@@ -174,7 +174,48 @@ cookie_session();
     $name_entreprise = $result_entreprise[1];
     $ceo_entreprise = $result_entreprise[2];
 
-
+    $salle_name_keys = [
+        "id",
+        "name",
+        "entreprise",
+     
+     ];
+     
+     $sql_salle_name = "SELECT id, name, entreprise FROM salle;";
+     $salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
+     
+     
+     $id_salle_name = $salle_name_result[0];
+     $name_salle_name = $salle_name_result[1];
+     $entreprise_salle = $salle_name_result[2];
+     
+     $student_salle_keys = [
+        "id",
+        "salle_1",
+        "salle_2",
+        "salle_3",
+        "salle_4",
+        "salle_5",
+        "salle_6",
+        "salle_7",
+        "salle_8",
+        
+     ];
+     
+     $sql_student_salle = "SELECT * FROM entreprise_student WHERE id = " . $id_student[0] . ";";
+     
+     $result_student_salle = import_arr($sql_student_salle, $student_salle_keys);
+     
+     $salle_1 = $result_student_salle[1];
+     $salle_2 = $result_student_salle[2];
+     $salle_3 = $result_student_salle[3];
+     $salle_4 = $result_student_salle[4];
+     $salle_5 = $result_student_salle[5];
+     $salle_6 = $result_student_salle[6];
+     $salle_7 = $result_student_salle[7];
+     $salle_8 = $result_student_salle[8];
+     
+     
 ?>
 <html lang="en">
    
@@ -811,8 +852,18 @@ cookie_session();
                               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-7-3"></div>
                               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-7-4"></div>
                               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-7-5"></div>
+
+
                            </div>
-                           
+                           <div class="row" style="order: 9;">
+                              <div class="dark_tile big_tile txt" id="sched-7-0">To hide here:</div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
+                           </div>
+
                            <input  type="hidden" name="sched-1-1-hidden" id="sched-1-1-hidden"></input>
                            <input  type="hidden" name="sched-1-2-hidden" id="sched-1-2-hidden"></input>
                            <input  type="hidden" name="sched-1-3-hidden" id="sched-1-3-hidden"></input>
@@ -854,6 +905,12 @@ cookie_session();
                            <input  type="hidden" name="sched-7-3-hidden" id="sched-7-3-hidden"></input>
                            <input  type="hidden" name="sched-7-4-hidden" id="sched-7-4-hidden"></input>
                            <input  type="hidden" name="sched-7-5-hidden" id="sched-7-5-hidden"></input>
+
+                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
+                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
+                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
+                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
+                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
 
 
 
