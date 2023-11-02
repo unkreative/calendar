@@ -105,9 +105,9 @@
 // INSERT INTO `entreprise_student` (`id`, `entreprise_1`, `entreprise_1_plage`, `entreprise_2`, `entreprise_2_plage`, `entreprise_3`, `entreprise_3_plage`, `entreprise_4`, `entreprise_4_plage`, `entreprise_5`, `entreprise_5_plage`, `entreprise_6`, `entreprise_6_plage`, `entreprise_7`, `entreprise_7_plage`, `entreprise_8`, `entreprise_8_plage`) VALUES ('', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 
 $entreprise_insert = [];
-
+echo "running here";
 foreach ($combined as $sched) {
-    // print_r($sched);
+    print_r($sched);
     if (!empty($sched[0])) {
         echo "<br>";
         echo $sched[0];
