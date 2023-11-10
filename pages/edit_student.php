@@ -6,9 +6,57 @@ cookie_session();
 <!doctype html>
 <!-- TODO expand this, with more data afterwards -->
 <?php
+
+
+
+
     require "../scripts/import_db_array.php";   
 
     $link_value = $_GET['student'];
+
+
+
+    $salle_name_keys = [
+        "id",
+        "name",
+        "entreprise",
+     
+     ];
+     
+     $sql_salle_name = "SELECT id, name, entreprise FROM salle;";
+     $salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
+     
+     
+     $id_salle_name = $salle_name_result[0];
+     $name_salle_name = $salle_name_result[1];
+     $entreprise_salle = $salle_name_result[2];
+     
+     $student_salle_keys = [
+        "id",
+        "salle_1",
+        "salle_2",
+        "salle_3",
+        "salle_4",
+        "salle_5",
+        "salle_6",
+        "salle_7",
+        "salle_8",
+        
+     ];
+     
+     $sql_student_salle = "SELECT * FROM entreprise_student WHERE id = " . $link_value . ";";
+     
+     $result_student_salle = import_arr($sql_student_salle, $student_salle_keys);
+     
+     $salle_1 = $result_student_salle[1];
+     $salle_2 = $result_student_salle[2];
+     $salle_3 = $result_student_salle[3];
+     $salle_4 = $result_student_salle[4];
+     $salle_5 = $result_student_salle[5];
+     $salle_6 = $result_student_salle[6];
+     $salle_7 = $result_student_salle[7];
+     $salle_8 = $result_student_salle[8];
+
 
     $notes_keys = ["id", "note"];// to continue, working on the note system
 
@@ -450,6 +498,7 @@ cookie_session();
       </style>    
 
 <script>
+
     const dict = {
         1: "1-1",
         2: "2-1",
@@ -486,6 +535,12 @@ cookie_session();
         33: "5-5",
         34: "6-5",
         35: "7-5",
+        0: "0-0",
+        37: "0-1",
+        38: "0-2",
+        39: "0-3",
+        40: "0-4",
+        
     };
     const dict_num = [
         1,
@@ -523,6 +578,11 @@ cookie_session();
         33,
         34,
         35,
+        37,
+        38,
+        39,
+        40,
+        0
     ];
     
     function check_double() {
@@ -858,10 +918,10 @@ cookie_session();
                            <div class="row" style="order: 9;">
                               <div class="dark_tile big_tile txt" id="sched-7-0">To hide here:</div>
                               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-0"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-1"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-2"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-3"></div>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="dark_tile big_tile txt" id="sched-0-4"></div>
                            </div>
 
                            <input  type="hidden" name="sched-1-1-hidden" id="sched-1-1-hidden"></input>
@@ -907,13 +967,21 @@ cookie_session();
                            <input  type="hidden" name="sched-7-5-hidden" id="sched-7-5-hidden"></input>
 
                            <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
-                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
-                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
-                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
-                           <input  type="hidden" name="sched-0-0-hidden" id="sched-0-0-hidden"></input>
+                           <input  type="hidden" name="sched-0-1-hidden" id="sched-0-1-hidden"></input>
+                           <input  type="hidden" name="sched-0-2-hidden" id="sched-0-2-hidden"></input>
+                           <input  type="hidden" name="sched-0-3-hidden" id="sched-0-3-hidden"></input>
+                           <input  type="hidden" name="sched-0-4-hidden" id="sched-0-4-hidden"></input>
 
-
-
+                           <input  type="hidden" name="salle_1_hidden" id="salle_1_hidden"></input>
+                           <input  type="hidden" name="salle_2_hidden" id="salle_2_hidden"></input>
+                           <input  type="hidden" name="salle_3_hidden" id="salle_3_hidden"></input>
+                           <input  type="hidden" name="salle_4_hidden" id="salle_4_hidden"></input>
+                           <input  type="hidden" name="salle_5_hidden" id="salle_5_hidden"></input>
+                           <input  type="hidden" name="salle_6_hidden" id="salle_6_hidden"></input>
+                           <input  type="hidden" name="salle_7_hidden" id="salle_7_hidden"></input>
+                           <input  type="hidden" name="salle_8_hidden" id="salle_8_hidden"></input>
+                           
+                           
                            <input  type="hidden" name="student_id" id="student_id" value="<?php echo $_GET["student"]?>"></input>
 
 
@@ -961,25 +1029,58 @@ cookie_session();
                               const entreprise_field_list = [entreprise_1_obj, entreprise_2_obj, entreprise_3_obj, entreprise_4_obj, entreprise_5_obj, entreprise_6_obj, entreprise_7_obj, entreprise_8_obj];
                               const plage_arr = [plage_1, plage_2, plage_3, plage_4, plage_5, plage_6, plage_7, plage_8];
                               
+                              const salle_1 = <?php echo json_encode($salle_1[0]); ?>;
+                              const salle_2 = <?php echo json_encode($salle_2[0]); ?>;
+                              const salle_3 = <?php echo json_encode($salle_4[0]); ?>;
+                              const salle_4 = <?php echo json_encode($salle_3[0]); ?>;
+                              const salle_5 = <?php echo json_encode($salle_5[0]); ?>;
+                              const salle_6 = <?php echo json_encode($salle_6[0]); ?>;
+                              const salle_7 = <?php echo json_encode($salle_7[0]); ?>;
+                              const salle_8 = <?php echo json_encode($salle_8[0]); ?>;
+
+                              const salle_combined = [salle_1, salle_2, salle_3, salle_4, salle_5, salle_6, salle_7, salle_8];
+                              const salle_name_1 = <?php echo json_encode($name_salle_name); ?>;
+                              const salle_id = <?php echo json_encode($id_salle_name); ?>;
+
                               let ent_index = 1;
                               combined.forEach(entreprise => {
                                 
                                   entreprise_field_list[ent_index-1].insertAdjacentHTML("beforeend", `<select onchange="update_entreprise(${ent_index})" name="entreprise_${ent_index}" id="entreprise_${ent_index}">  </select>`);
+                                  entreprise_field_list[ent_index-1].insertAdjacentHTML("beforeend", `<select name="salle_${ent_index}" id="salle_${ent_index}">  </select>`);
 
                                   let ent_select = document.getElementById(`entreprise_${ent_index}`);
+                                  let salle_select = document.getElementById(`salle_${ent_index}`);
                                   //   console.log(classes[0]);
+
+                                salle_name_1.forEach(salle_item => {
+                                    if (Number(salle_combined[ent_index]) === Number(salle_item)) 
+                                    {
+                                        salle_select.insertAdjacentHTML("beforeend", `<option value="${salle_item}" selected>${salle_item}</option>`);
+
+                                    }
+                                    else {
+                                        salle_select.insertAdjacentHTML("beforeend", `<option value="${salle_item}">${salle_item}</option>`);
+                                    }
+                                        
+                                    
+                                });
+
+
+
                                   id_entreprise.forEach(ent_loop => {
 
 
                                       if (Number(ent_loop) === Number(entreprise[0])){
-                                          ent_select.insertAdjacentHTML("beforeend", `<option value="${ent_loop}" selected>${entreprises[ent_loop-1]}</option>`);
+                                          ent_select.insertAdjacentHTML("beforeend", `<option value="${ent_loop}" selected>${entreprises[ent_loop]}</option>`);
                                 }
                                 else {
-                                    ent_select.insertAdjacentHTML("beforeend", `<option value="${ent_loop}">${entreprises[ent_loop-1]}</option>`);
+                                    ent_select.insertAdjacentHTML("beforeend", `<option value="${ent_loop}">${entreprises[ent_loop]}</option>`);
                                 }
                             });
                             ent_index = ent_index + 1; 
                         });
+
+
                                   
                             function update_entreprise(id) {
                                 let entreprise_select = document.getElementById(`entreprise_${id}`);
@@ -988,7 +1089,7 @@ cookie_session();
                                 var cell = document.getElementById(id);
                                 cell.innerHTML = "";
 
-                                cell.insertAdjacentHTML("afterbegin", `<b id="${id}" draggable="true"  ondragstart="drag(event)" style=" font-family: sans-serif; font-weigth: normal;">${id} ${entreprises[entreprise_select.value-1]}</b>`)
+                                cell.insertAdjacentHTML("afterbegin", `<b id="${id}" draggable="true"  ondragstart="drag(event)" style=" font-family: sans-serif; font-weigth: normal;">${id} ${entreprises[entreprise_select.value]}</b>`)
                                 
                                 console.log(cell);
                             };
@@ -997,8 +1098,6 @@ cookie_session();
 
                               function display_entreprises() {
 
-
-                                    
                                     var index = 0;
                                     
                                     for (var element of plage_arr) {
@@ -1006,7 +1105,7 @@ cookie_session();
                                         //  console.log(dict[element]);
                                         
                                         var cell = document.getElementById(`sched-${dict[element]}`);
-                                        cell.insertAdjacentHTML("afterbegin", `<b id="${index+1}" draggable="true"  ondragstart="drag(event)" style=" font-family: sans-serif; font-weigth: normal;">${index+1} ${entreprises[current_entreprise-1]}</b>`);
+                                        cell.insertAdjacentHTML("afterbegin", `<b id="${index+1}" draggable="true"  ondragstart="drag(event)" style=" font-family: sans-serif; font-weigth: normal;">${index+1} ${entreprises[current_entreprise]}</b>`);
                                         
                                         index ++;
 
@@ -1022,8 +1121,13 @@ cookie_session();
 
 <script>
                     
-                        
+                            // fields for the hidden plages 
                             let sched_0_0_hidden = document.getElementById("sched-0-0-hidden");
+                            let sched_0_1_hidden = document.getElementById("sched-0-1-hidden");
+                            let sched_0_2_hidden = document.getElementById("sched-0-2-hidden");
+                            let sched_0_3_hidden = document.getElementById("sched-0-3-hidden");
+                            let sched_0_4_hidden = document.getElementById("sched-0-4-hidden");
+
                             let sched_1_1_hidden = document.getElementById("sched-1-1-hidden");
                             let sched_1_2_hidden = document.getElementById("sched-1-2-hidden");
                             let sched_1_3_hidden = document.getElementById("sched-1-3-hidden");
@@ -1060,9 +1164,14 @@ cookie_session();
                             let sched_7_4_hidden = document.getElementById("sched-7-4-hidden");
                             let sched_7_5_hidden = document.getElementById("sched-7-5-hidden");
                             
-                            let combined_hidden = [sched_0_0, sched_1_1_hidden, sched_1_2_hidden, sched_1_3_hidden, sched_1_4_hidden, sched_1_5_hidden, sched_2_1_hidden, sched_2_2_hidden, sched_2_3_hidden, sched_2_4_hidden, sched_2_5_hidden, sched_3_1_hidden, sched_3_2_hidden, sched_3_3_hidden, sched_3_4_hidden, sched_3_5_hidden, sched_4_1_hidden, sched_4_2_hidden, sched_4_3_hidden, sched_4_4_hidden, sched_4_5_hidden, sched_5_1_hidden, sched_5_2_hidden, sched_5_3_hidden, sched_5_4_hidden, sched_5_5_hidden, sched_6_1_hidden, sched_6_2_hidden, sched_6_3_hidden, sched_6_4_hidden, sched_6_5_hidden, sched_7_1_hidden, sched_7_2_hidden, sched_7_3_hidden, sched_7_4_hidden, sched_7_5_hidden];
+                            let combined_hidden = [sched_0_0_hidden, sched_0_1_hidden, sched_0_2_hidden, sched_0_3_hidden, sched_0_4_hidden, sched_1_1_hidden, sched_1_2_hidden, sched_1_3_hidden, sched_1_4_hidden, sched_1_5_hidden, sched_2_1_hidden, sched_2_2_hidden, sched_2_3_hidden, sched_2_4_hidden, sched_2_5_hidden, sched_3_1_hidden, sched_3_2_hidden, sched_3_3_hidden, sched_3_4_hidden, sched_3_5_hidden, sched_4_1_hidden, sched_4_2_hidden, sched_4_3_hidden, sched_4_4_hidden, sched_4_5_hidden, sched_5_1_hidden, sched_5_2_hidden, sched_5_3_hidden, sched_5_4_hidden, sched_5_5_hidden, sched_6_1_hidden, sched_6_2_hidden, sched_6_3_hidden, sched_6_4_hidden, sched_6_5_hidden, sched_7_1_hidden, sched_7_2_hidden, sched_7_3_hidden, sched_7_4_hidden, sched_7_5_hidden];
                             
                             let sched_0_0 = document.getElementById("sched-0-0");
+                            let sched_0_1 = document.getElementById("sched-0-1");
+                            let sched_0_2 = document.getElementById("sched-0-2");
+                            let sched_0_3 = document.getElementById("sched-0-3");
+                            let sched_0_4 = document.getElementById("sched-0-4");
+
                             let sched_1_1 = document.getElementById("sched-1-1");
                             let sched_1_2 = document.getElementById("sched-1-2");
                             let sched_1_3 = document.getElementById("sched-1-3");
@@ -1098,8 +1207,33 @@ cookie_session();
                             let sched_7_3 = document.getElementById("sched-7-3");
                             let sched_7_4 = document.getElementById("sched-7-4");
                             let sched_7_5 = document.getElementById("sched-7-5");
+
+                            // salles
+                            let salle_1_hidden = document.getElementById("salle_1_hidden");
+                            let salle_2_hidden = document.getElementById("salle_2_hidden");
+                            let salle_3_hidden = document.getElementById("salle_3_hidden");
+                            let salle_4_hidden = document.getElementById("salle_4_hidden");
+                            let salle_5_hidden = document.getElementById("salle_5_hidden");
+                            let salle_6_hidden = document.getElementById("salle_6_hidden");
+                            let salle_7_hidden = document.getElementById("salle_7_hidden");
+                            let salle_8_hidden = document.getElementById("salle_8_hidden");
+
+                            let salle_1_1 = document.getElementById("salle_1");
+                            let salle_2_1 = document.getElementById("salle_2");
+                            let salle_3_1 = document.getElementById("salle_3");
+                            let salle_4_1 = document.getElementById("salle_4");
+                            let salle_5_1 = document.getElementById("salle_5");
+                            let salle_6_1 = document.getElementById("salle_6");
+                            let salle_7_1 = document.getElementById("salle_7");
+                            let salle_8_1 = document.getElementById("salle_8");
+
+                            let combined_salle = [salle_1_1, salle_2_1, salle_3_1, salle_4_1, salle_5_1, salle_6_1, salle_7_1, salle_8_1];
+
+                            let combined_salle_hidden = [salle_1_hidden, salle_2_hidden, salle_3_hidden, salle_4_hidden, salle_5_hidden, salle_6_hidden, salle_7_hidden, salle_8_hidden];
                             
-                            let combined_normal = [sched_0_0, sched_1_1, sched_1_2, sched_1_3, sched_1_4, sched_1_5, sched_2_1, sched_2_2, sched_2_3, sched_2_4, sched_2_5, sched_3_1, sched_3_2, sched_3_3, sched_3_4, sched_3_5, sched_4_1, sched_4_2, sched_4_3, sched_4_4, sched_4_5, sched_5_1, sched_5_2, sched_5_3, sched_5_4, sched_5_5, sched_6_1, sched_6_2, sched_6_3, sched_6_4, sched_6_5, sched_7_1, sched_7_2, sched_7_3, sched_7_4, sched_7_5];
+                            // let combined_salle = ["#salle_1", "#salle_2", "#salle_3", "#salle_4", "#salle_5", "#salle_6", "#salle_7", "#salle_8"];
+
+                            let combined_normal = [sched_0_0, sched_0_1, sched_0_2, sched_0_3, sched_0_4, sched_1_1, sched_1_2, sched_1_3, sched_1_4, sched_1_5, sched_2_1, sched_2_2, sched_2_3, sched_2_4, sched_2_5, sched_3_1, sched_3_2, sched_3_3, sched_3_4, sched_3_5, sched_4_1, sched_4_2, sched_4_3, sched_4_4, sched_4_5, sched_5_1, sched_5_2, sched_5_3, sched_5_4, sched_5_5, sched_6_1, sched_6_2, sched_6_3, sched_6_4, sched_6_5, sched_7_1, sched_7_2, sched_7_3, sched_7_4, sched_7_5];
                             
                             let index_hidden = 0;
                             
@@ -1108,8 +1242,30 @@ cookie_session();
                                 index_hidden = index_hidden + 1;
                             });
                             
+                            let index_salle = 0;
+
+                            combined_salle.forEach(salle_name => {
+                                console.log(salle_name.value);
+                                combined_salle_hidden[index_salle].value = salle_id[salle_name_1.indexOf(salle_name.value)];
+                                console.log(combined_salle_hidden[index_salle].value);
+
+                                index_salle += 1;
+                            });
+
                             function submit_edit() {
                                 
+                                let index_salle = 0;
+
+                                combined_salle.forEach(salle_name => {
+                                    console.log(salle_name.value);
+                                    combined_salle_hidden[index_salle].value = salle_id[salle_name_1.indexOf(salle_name.value)];
+
+                                console.log(combined_salle_hidden[index_salle].value);
+
+                                    index_salle += 1;
+                                });
+
+
                                 let index_hidden = 0;
                                 let form = document.getElementById("formm");
                             

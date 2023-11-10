@@ -612,19 +612,26 @@ $ceo_entreprise = $result_entreprise[2];
                               
                               const combined = [plage_1_entreprise, plage_2_entreprise, plage_3_entreprise, plage_4_entreprise, plage_5_entreprise, plage_6_entreprise, plage_7_entreprise, plage_8_entreprise];
 
-                              var units_present = 0;
+                              const combined2 = [plage_1, plage_2, plage_3, plage_4, plage_5, plage_6, plage_7, plage_8];
+                              var check_array = [0, 37, 38, 39, 40, "0", "37", "38", "39", "40"]; 
 
                               const count = {};
+                              var idx = 0;
 
                               for (const element of combined) {
-                              if (count[element]) {
+
+                                 if (!check_array.includes(combined2[idx])) {
+
+                                 if (count[element]) {
                                  count[element] += 1;
                               } else {
                                  count[element] = 1;
                               }
+                           }
+                              idx += 1;
                               }
                               // console.log(Object.keys(count).length);
-                              // console.log(count);
+                              console.log(count);
 
 
                               var text_display = "Entreprise(s): ";
@@ -639,7 +646,7 @@ $ceo_entreprise = $result_entreprise[2];
                                  if (index == 1) {
                                     text_display = text_display + ", ";
                                  }
-                                 text_display = text_display + `${entreprises[cache_entreprise-1]} (${cache_plages[index]})`;
+                                 text_display = text_display + `${entreprises[cache_entreprise]} (${cache_plages[index]})`;
 
                                  index = index + 1; 
                               }
@@ -698,14 +705,17 @@ $ceo_entreprise = $result_entreprise[2];
                               
                               var index = 0;
                               for (var element of plage_arr) {
-                                 let current_entreprise = combined[index];
-                                 console.log(dict[element]);
-
-                                 var cell = document.getElementById(`sched-${dict[element]}`);
-                                 cell.insertAdjacentHTML("afterbegin", `<b style=" font-family: sans-serif; font-weigth: normal;">${entreprises[current_entreprise-1]}</b>`);
-
-
-                              index ++;
+                                 if (!check_array.includes(element)) {
+                                    
+                                    let current_entreprise = combined[index];
+                                    console.log(dict[element]);
+                                    
+                                    var cell = document.getElementById(`sched-${dict[element]}`);
+                                    cell.insertAdjacentHTML("afterbegin", `<b style=" font-family: sans-serif; font-weigth: normal;">${entreprises[current_entreprise]}</b>`);
+                                    
+                                    
+                                    index ++;
+                                 };
                            
                            };
 

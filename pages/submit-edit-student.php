@@ -1,6 +1,8 @@
 <?php
+require "../scripts/check-login.php";
 
-    // connect to database
+require "../scripts/import_db_array.php";   
+// connect to database
     $db_host     = 'database';
     $db_user     = 'root';
     $db_password = 'xens';
@@ -15,12 +17,30 @@
         exit();
     };
 
+    $salle_name_keys = [
+        "id",
+        "name",
+        "entreprise",
+     
+     ];
+     
+     $sql_salle_name = "SELECT id, name, entreprise FROM salle;";
+     $salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
+     
+     
+     $id_salle_name = $salle_name_result[0];
+     $name_salle_name = $salle_name_result[1];
+     $entreprise_salle = $salle_name_result[2];
     // echo '<pre>';
     // print_r($_POST);
     // echo '</pre>';
 
     $dict = [
         "0-0" => 0,
+        "0-1" => 37,
+        "0-2" => 38,
+        "0-3" => 39,
+        "0-4" => 40,
         "1-1" => 1,
         "2-1" => 2,
         "3-1" => 3,
@@ -63,7 +83,11 @@
     ];
 
     $sched_0_0_hidden = [substr($_POST["sched-0-0-hidden"],2), "0-0"];
-    print_r($sched_0_0_hidden);
+    $sched_0_1_hidden = [substr($_POST["sched-0-1-hidden"],2), "0-1"];
+    $sched_0_2_hidden = [substr($_POST["sched-0-2-hidden"],2), "0-2"];
+    $sched_0_3_hidden = [substr($_POST["sched-0-3-hidden"],2), "0-3"];
+    $sched_0_4_hidden = [substr($_POST["sched-0-4-hidden"],2), "0-4"];
+    // print_r($sched_0_0_hidden);
     $sched_1_1_hidden = [substr($_POST["sched-1-1-hidden"],2), "1-1"];
     $sched_1_2_hidden = [substr($_POST["sched-1-2-hidden"],2), "1-2"];
     $sched_1_3_hidden = [substr($_POST["sched-1-3-hidden"],2), "1-3"];
@@ -100,21 +124,47 @@
     $sched_7_4_hidden = [substr($_POST["sched-7-4-hidden"],2), "7-4"];
     $sched_7_5_hidden = [substr($_POST["sched-7-5-hidden"],2), "7-5"];
 
-    $combined = [$sched_0_0_hidden, $sched_1_1_hidden, $sched_1_2_hidden, $sched_1_3_hidden, $sched_1_4_hidden, $sched_1_5_hidden, $sched_2_1_hidden, $sched_2_2_hidden, $sched_2_3_hidden, $sched_2_4_hidden, $sched_2_5_hidden, $sched_3_1_hidden, $sched_3_2_hidden, $sched_3_3_hidden, $sched_3_4_hidden, $sched_3_5_hidden, $sched_4_1_hidden, $sched_4_2_hidden, $sched_4_3_hidden, $sched_4_4_hidden, $sched_4_5_hidden, $sched_5_1_hidden, $sched_5_2_hidden, $sched_5_3_hidden, $sched_5_4_hidden, $sched_5_5_hidden, $sched_6_1_hidden, $sched_6_2_hidden, $sched_6_3_hidden, $sched_6_4_hidden, $sched_6_5_hidden, $sched_7_1_hidden, $sched_7_2_hidden, $sched_7_3_hidden, $sched_7_4_hidden, $sched_7_5_hidden];
+    $combined = [$sched_0_0_hidden, $sched_0_1_hidden, $sched_0_2_hidden, $sched_0_3_hidden, $sched_0_4_hidden, $sched_1_1_hidden, $sched_1_2_hidden, $sched_1_3_hidden, $sched_1_4_hidden, $sched_1_5_hidden, $sched_2_1_hidden, $sched_2_2_hidden, $sched_2_3_hidden, $sched_2_4_hidden, $sched_2_5_hidden, $sched_3_1_hidden, $sched_3_2_hidden, $sched_3_3_hidden, $sched_3_4_hidden, $sched_3_5_hidden, $sched_4_1_hidden, $sched_4_2_hidden, $sched_4_3_hidden, $sched_4_4_hidden, $sched_4_5_hidden, $sched_5_1_hidden, $sched_5_2_hidden, $sched_5_3_hidden, $sched_5_4_hidden, $sched_5_5_hidden, $sched_6_1_hidden, $sched_6_2_hidden, $sched_6_3_hidden, $sched_6_4_hidden, $sched_6_5_hidden, $sched_7_1_hidden, $sched_7_2_hidden, $sched_7_3_hidden, $sched_7_4_hidden, $sched_7_5_hidden];
+
+    $salle_1 = intval($_POST["salle_1_hidden"]);
+    $salle_2 = intval($_POST["salle_2_hidden"]);
+    $salle_3 = intval($_POST["salle_3_hidden"]);
+    $salle_4 = intval($_POST["salle_4_hidden"]);
+    $salle_5 = intval($_POST["salle_5_hidden"]);
+    $salle_6 = intval($_POST["salle_6_hidden"]);
+    $salle_7 = intval($_POST["salle_7_hidden"]);
+    $salle_8 = intval($_POST["salle_8_hidden"]);
+
+
+
+
 
 // INSERT INTO `entreprise_student` (`id`, `entreprise_1`, `entreprise_1_plage`, `entreprise_2`, `entreprise_2_plage`, `entreprise_3`, `entreprise_3_plage`, `entreprise_4`, `entreprise_4_plage`, `entreprise_5`, `entreprise_5_plage`, `entreprise_6`, `entreprise_6_plage`, `entreprise_7`, `entreprise_7_plage`, `entreprise_8`, `entreprise_8_plage`) VALUES ('', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 
+
+
+
 $entreprise_insert = [];
-echo "running here";
+// echo "running here 222<br>";
+// print_r($sched_0_0_hidden);
+// echo "<br>";
+
 foreach ($combined as $sched) {
-    print_r($sched);
+    // print_r($sched);
+    // echo "<br>";
     if (!empty($sched[0])) {
-        echo "<br>";
-        echo $sched[0];
+        // echo "<br>";
+        // echo "<br> new section";
+        
+        // echo $sched[0];
 
         $entreprise_id = $entreprises[$sched[0]];
         $entreprise_plage = $dict[$sched[1]];
 
+        // print_r($entreprise_id);
+        // echo "<br>";
+        // print_r($entreprise_plage);
+        // echo "<br>";
         array_push($entreprise_insert, [$entreprise_id, $entreprise_plage]);
 
     };
@@ -126,9 +176,10 @@ if (count($entreprise_insert) > 8) {
 
 };
 
-print_r($entreprise_insert);
+// print_r($entreprise_insert);
 
 $sql_student_entreprise = "UPDATE entreprise_student SET entreprise_1_plage = ". $entreprise_insert[0][1]. ", entreprise_2_plage = ". $entreprise_insert[1][1]. ", entreprise_3_plage = ". $entreprise_insert[2][1]. ", entreprise_4_plage = ". $entreprise_insert[3][1]. ", entreprise_5_plage = ". $entreprise_insert[4][1]. ", entreprise_6_plage = ". $entreprise_insert[5][1]. ", entreprise_7_plage = ". $entreprise_insert[6][1]. ", entreprise_8_plage = ". $entreprise_insert[7][1]. ", entreprise_1 = " .$entreprise_insert[0][0]. ", entreprise_2 = " .$entreprise_insert[1][0]. ", entreprise_3 = " .$entreprise_insert[2][0]. ", entreprise_4 = " .$entreprise_insert[3][0]. ", entreprise_5 = " .$entreprise_insert[4][0]. ", entreprise_6 = " .$entreprise_insert[5][0]. ", entreprise_7 = " .$entreprise_insert[6][0]. ", entreprise_8 = " .$entreprise_insert[7][0]. " WHERE id = " . $_POST["student_id"]. ";";
+$sql_student_entreprise_salles = "UPDATE entreprise_student SET salle_1 = " . $salle_1 . ", salle_2 = " . $salle_2 . ", salle_3 = " . $salle_3 . ", salle_4 = " . $salle_4 . ", salle_5 = " . $salle_5 . ", salle_6 = " . $salle_6 . ", salle_7 = " . $salle_7 . ", salle_8 = " . $salle_8 . " WHERE id = " . $_POST["student_id"]. ";";
 
 
 $sql_student = "UPDATE student SET first_name = '". $_POST["first_name"] . "', second_name ='". $_POST["second_name"] . "', iam = '". $_POST["iam"] . "', class = ". $_POST["class"] . ", tuteur =" . $_POST["tuteur"] ." WHERE id = "  . $_POST["student_id"]. ";";
@@ -144,6 +195,7 @@ $sql_note = "UPDATE note SET note = '". $_POST["note"] . "' WHERE id = " . $_POS
 // echo "<br>";
 
 $mysqli->query($sql_student_entreprise);
+$mysqli->query($sql_student_entreprise_salles);
 $mysqli->query($sql_student);
 $mysqli->query($sql_note);
 

@@ -13,6 +13,51 @@ require "../scripts/import_db_array.php";
 
 // import timeschedule from student
 
+$salle_name_keys = [
+    "id",
+    "name",
+    "entreprise",
+ 
+ ];
+ 
+ $sql_salle_name = "SELECT id, name, entreprise FROM salle;";
+ $salle_name_result = import_arr($sql_salle_name, $salle_name_keys);
+ 
+ 
+ $id_salle_name = $salle_name_result[0];
+ $name_salle_name = $salle_name_result[1];
+ $entreprise_salle = $salle_name_result[2];
+ 
+ $student_salle_keys = [
+    "id",
+    "salle_1",
+    "salle_2",
+    "salle_3",
+    "salle_4",
+    "salle_5",
+    "salle_6",
+    "salle_7",
+    "salle_8",
+    
+ ];
+ 
+ $sql_student_salle = "SELECT * FROM entreprise_student WHERE id = " . $id_student[0] . ";";
+ 
+ $result_student_salle = import_arr($sql_student_salle, $student_salle_keys);
+ 
+ $salle_1 = $result_student_salle[1];
+ $salle_2 = $result_student_salle[2];
+ $salle_3 = $result_student_salle[3];
+ $salle_4 = $result_student_salle[4];
+ $salle_5 = $result_student_salle[5];
+ $salle_6 = $result_student_salle[6];
+ $salle_7 = $result_student_salle[7];
+ $salle_8 = $result_student_salle[8];
+ 
+
+
+
+ 
 $student_entreprise_keys = [
     "id",
     "entreprise_1",
